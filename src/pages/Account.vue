@@ -18,8 +18,7 @@
         <p>Logout</p>
       </div>
     </ion-card>
-    <base-button id="open-delete-dialog">Delete Account</base-button>
-    <delete-account-dialog></delete-account-dialog>
+    <language></language>
   </base-layout>
 </template>
 
@@ -27,12 +26,14 @@
 import { IonIcon, IonCard } from "@ionic/vue";
 import { chevronForwardOutline } from "ionicons/icons";
 import DeleteAccountDialog from "../components/account/DeleteAccountDialog.vue";
+import Language from "../components/base/Language.vue";
 
 export default {
   components: {
     IonIcon,
     IonCard,
     DeleteAccountDialog,
+    Language,
   },
   data() {
     return {
@@ -51,6 +52,10 @@ export default {
 </script>
 
 <style scoped>
+ion-content {
+  display: flex;
+}
+
 small {
   font-family: var(--ion-font-family);
   font-size: 14px;

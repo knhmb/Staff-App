@@ -1,21 +1,6 @@
 <template>
   <base-layout :hide-header="true" :hide-footer="true" :add-padding="true">
-    <div class="language">
-      <div
-        class="left"
-        :class="{ 'is-selected': currentLang === 'eng' }"
-        @click="setOption('eng')"
-      >
-        Eng
-      </div>
-      <div
-        class="right"
-        :class="{ 'is-selected': currentLang === 'chi' }"
-        @click="setOption('chi')"
-      >
-        中文
-      </div>
-    </div>
+    <language></language>
     <ion-img src="/assets/logo.png"></ion-img>
     <p>Login to your account</p>
     <login-form></login-form>
@@ -25,22 +10,24 @@
 <script>
 import { IonImg } from "@ionic/vue";
 import LoginForm from "../components/login/LoginForm.vue";
+import Language from "../components/base/Language.vue";
 
 export default {
   components: {
     IonImg,
     LoginForm,
+    Language,
   },
-  data() {
-    return {
-      currentLang: "eng",
-    };
-  },
-  methods: {
-    setOption(option) {
-      this.currentLang = option;
-    },
-  },
+  // data() {
+  //   return {
+  //     currentLang: "eng",
+  //   };
+  // },
+  // methods: {
+  //   setOption(option) {
+  //     this.currentLang = option;
+  //   },
+  // },
 };
 </script>
 
