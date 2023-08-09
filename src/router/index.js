@@ -9,11 +9,6 @@ const routes = [
     redirect: "/login",
   },
   {
-    path: "/create-account",
-    name: "CreateAccount",
-    component: CreateAccount,
-  },
-  {
     path: "/login",
     name: "Login",
     component: () => import("../pages/Login.vue"),
@@ -29,82 +24,29 @@ const routes = [
     component: () => import("../pages/ResetPassword.vue"),
   },
   {
-    path: "/projects",
-    name: "Projects",
-    component: () => import("../pages/Projects.vue"),
-    // beforeEnter(to, from, next) {
-    //   const isAuthenticated = localStorage.getItem("accessToken");
-    //   if (isAuthenticated) {
-    //     next();
-    //     return;
-    //   }
-    //   next("/");
-    // },
+    path: "/storage",
+    name: "Storage",
+    component: () => import("../pages/Storage.vue"),
   },
   {
-    path: "/projects/:id",
-    name: "ProjectsDetail",
-    component: () => import("../pages/ProjectsDetail.vue"),
-    // beforeEnter(to, from, next) {
-    //   const isAuthenticated = localStorage.getItem("accessToken");
-    //   if (isAuthenticated) {
-    //     next();
-    //     return;
-    //   }
-    //   next("/");
-    // },
+    path: "/storage-list",
+    name: "StorageList",
+    component: () => import("../pages/StorageList.vue"),
   },
   {
-    path: "/rennovation-schedule",
-    name: "RennovationSchedule",
-    component: () => import("../pages/RennovationSchedule.vue"),
-    // beforeEnter(to, from, next) {
-    //   const isAuthenticated = localStorage.getItem("accessToken");
-    //   if (isAuthenticated) {
-    //     next();
-    //     return;
-    //   }
-    //   next("/");
-    // },
+    path: "/stock-management",
+    name: "StockManagement",
+    component: () => import("../pages/StockManagement.vue"),
   },
   {
-    path: "/rennovation-schedule-in-progress",
-    name: "RennovationInProgress",
-    component: () => import("../pages/RennovationScheduleInProgress.vue"),
-    // beforeEnter(to, from, next) {
-    //   const isAuthenticated = localStorage.getItem("accessToken");
-    //   if (isAuthenticated) {
-    //     next();
-    //     return;
-    //   }
-    //   next("/");
-    // },
+    path: "/stock-management-add",
+    name: "StockManagementAdd",
+    component: () => import("../pages/StockManagementAdd.vue"),
   },
   {
-    path: "/rennovation-schedule-pending",
-    name: "RennovationPending",
-    component: () => import("../pages/RennovationSchedulePending.vue"),
-    // beforeEnter(to, from, next) {
-    //   const isAuthenticated = localStorage.getItem("accessToken");
-    //   if (isAuthenticated) {
-    //     next();
-    //     return;
-    //   }
-    //   next("/");
-    // },
-  },
-  {
-    path: "/rennovation-schedule-completed",
-    name: "RennovationCompleted",
-    component: () => import("../pages/RennovationScheduleCompleted.vue"),
-    // beforeEnter(to, from, next) {
-    //   const isAuthenticated = localStorage.getItem("accessToken");
-    //   if (isAuthenticated) {
-    //     next();
-    //     return;
-    //   }
-    //   next("/");
-    // },
+    path: "/stock-management/:id",
+    name: "StockManagementDetail",
+    component: () => import("../pages/StockManagementDetails.vue"),
   },
   {
     path: "/profile",

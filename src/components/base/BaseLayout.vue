@@ -2,6 +2,21 @@
   <ion-page>
     <ion-header :class="{ 'is-hidden': hideHeader }">
       <ion-toolbar>
+        <ion-buttons
+          :class="{ 'is-hidden': !addActionButtons }"
+          slot="end"
+          class="edit-delete"
+        >
+          <ion-icon :icon="pencilOutline"></ion-icon>
+          <ion-icon :icon="trashOutline"></ion-icon>
+        </ion-buttons>
+        <ion-buttons
+          router-link="/stock-management-add"
+          slot="end"
+          :class="{ 'is-hidden': !addButton }"
+        >
+          <ion-icon :icon="addCircle"></ion-icon>
+        </ion-buttons>
         <ion-buttons slot="start">
           <ion-back-button
             :class="{ 'is-hidden': hideBackButton }"
@@ -33,7 +48,9 @@ import {
   IonButtons,
   IonBackButton,
   IonFooter,
+  IonIcon,
 } from "@ionic/vue";
+import { addCircle, pencilOutline, trashOutline } from "ionicons/icons";
 import Tabs from "../Tabs.vue";
 
 export default {
@@ -44,6 +61,8 @@ export default {
     "hideFooter",
     "hideBackButton",
     "addPadding",
+    "addButton",
+    "addActionButtons",
   ],
   components: {
     IonPage,
@@ -55,6 +74,10 @@ export default {
     IonBackButton,
     Tabs,
     IonFooter,
+    IonIcon,
+  },
+  data() {
+    return { addCircle, pencilOutline, trashOutline };
   },
 };
 </script>
@@ -66,5 +89,18 @@ export default {
 
 ion-back-button {
   color: #00427a;
+}
+
+ion-icon {
+  font-size: 1.4rem;
+}
+
+.edit-delete {
+  display: flex;
+  align-items: center;
+}
+
+.edit-delete ion-icon:first-of-type {
+  margin-right: 0.7rem;
 }
 </style>

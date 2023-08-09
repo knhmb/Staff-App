@@ -44,7 +44,7 @@
         </p>
       </ion-item>
       <ion-item lines="none">
-        <base-button class="account-btn" router-link="/create-account"
+        <base-button class="account-btn" router-link="/storage"
           >Login</base-button
         >
       </ion-item>

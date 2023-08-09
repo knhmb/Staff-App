@@ -26,7 +26,9 @@ ion-list.list-ios {
   background: none;
 }
 
-ion-input {
+ion-input,
+ion-textarea,
+ion-select {
   border-radius: 24px;
   border: 1px solid var(--ion-color-primary-contrast);
   background: var(--ion-color-primary-contrast);
