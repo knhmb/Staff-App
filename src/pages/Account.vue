@@ -4,6 +4,7 @@
     :hide-back-button="true"
     :add-padding="true"
   >
+    <small>Setting</small>
     <ion-card>
       <div class="item" @click="$router.push('/edit-profile')">
         <p>Edit Profile</p>
@@ -11,22 +12,6 @@
       </div>
       <div class="item" @click="$router.push('/change-password')">
         <p>Change Password</p>
-        <ion-icon :icon="chevronForwardOutline"></ion-icon>
-      </div>
-      <div class="item" @click="$router.push('/privacy-policy')">
-        <p>Privacy Policy</p>
-        <ion-icon :icon="chevronForwardOutline"></ion-icon>
-      </div>
-      <div class="item" @click="$router.push('/terms-conditions')">
-        <p>Terms & Conditions</p>
-        <ion-icon :icon="chevronForwardOutline"></ion-icon>
-      </div>
-      <div class="item" @click="$router.push('/about-us')">
-        <p>About Us</p>
-        <ion-icon :icon="chevronForwardOutline"></ion-icon>
-      </div>
-      <div class="item" @click="$router.push('/contact-us')">
-        <p>Contact Us</p>
         <ion-icon :icon="chevronForwardOutline"></ion-icon>
       </div>
       <div class="item" @click="logout">
@@ -66,9 +51,22 @@ export default {
 </script>
 
 <style scoped>
+small {
+  font-family: var(--ion-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #939aa3;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
 ion-card {
   margin-top: 0;
   --background: var(--ion-color-primary-contrast);
+  box-shadow: none;
 }
 
 ion-item {
@@ -106,7 +104,7 @@ ion-item {
 }
 
 ion-icon {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: #c9cdd4;
 }
 

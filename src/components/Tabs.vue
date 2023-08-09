@@ -2,17 +2,21 @@
   <ion-tabs>
     <ion-router-outlet></ion-router-outlet>
     <ion-tab-bar slot="bottom">
-      <ion-tab-button tab="projects" href="/projects">
-        <ion-icon :icon="homeOutline"></ion-icon>
-        Projects
+      <ion-tab-button tab="storage" href="/storage">
+        <ion-icon :icon="serverOutline"></ion-icon>
+        Storage
       </ion-tab-button>
-      <ion-tab-button tab="rennovation-schedule" href="/rennovation-schedule">
-        <ion-icon :icon="calendarOutline"></ion-icon>
-        Rennovation Schedule
+      <ion-tab-button tab="stock-management" href="/stock-management">
+        <ion-icon :icon="folderOutline"></ion-icon>
+        Management
+      </ion-tab-button>
+      <ion-tab-button tab="sales-record" href="/sales-record">
+        <ion-icon :icon="documentOutline"></ion-icon>
+        Sales Record
       </ion-tab-button>
       <ion-tab-button tab="profile" href="/profile">
-        <ion-icon :icon="personOutline"></ion-icon>
-        Profile
+        <ion-icon :icon="menuOutline"></ion-icon>
+        Menu
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
@@ -26,7 +30,12 @@ import {
   IonIcon,
   IonRouterOutlet,
 } from "@ionic/vue";
-import { homeOutline, calendarOutline, personOutline } from "ionicons/icons";
+import {
+  serverOutline,
+  folderOutline,
+  documentOutline,
+  menuOutline,
+} from "ionicons/icons";
 
 export default {
   components: {
@@ -38,9 +47,10 @@ export default {
   },
   data() {
     return {
-      homeOutline,
-      calendarOutline,
-      personOutline,
+      serverOutline,
+      folderOutline,
+      documentOutline,
+      menuOutline,
     };
   },
 };
@@ -63,7 +73,6 @@ ion-tab-button {
 }
 
 ion-tab-button.tab-selected {
-  /* color: var(--ion-color-primary); */
-  color: #6e4d27;
+  color: var(--ion-text-color-primary-contrast);
 }
 </style>

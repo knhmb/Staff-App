@@ -26,11 +26,6 @@
           <base-input placeholder="Username" required></base-input>
         </div>
       </ion-item>
-      <ion-item lines="none">
-        <div class="input-content">
-          <base-input placeholder="Phone"></base-input>
-        </div>
-      </ion-item>
     </ion-list>
     <base-button>Save</base-button>
   </form>

@@ -1,68 +1,35 @@
 <template>
-  <base-layout
-    page-title="Stock Management"
-    :add-padding="true"
-    :add-button="true"
-  >
+  <base-layout page-title="Sales Record" :add-padding="true">
     <div class="card">
       <div class="item">
         <div class="left">
           <p>Date</p>
           <p class="name">Item Name</p>
-          <p>Item Category</p>
+          <p>Item Code / Item Category</p>
         </div>
         <div class="right">
           <div class="text">
-            <p class="name">Transaction Type / Quantity</p>
-            <p>Bin Location (Warehouse) code</p>
-          </div>
-
-          <div class="icon">
-            <ion-icon :icon="chevronForwardOutline"></ion-icon>
+            <p class="name">Quantity</p>
+            <p>Transaction ID</p>
           </div>
         </div>
       </div>
-      <div
-        class="item"
-        v-for="item in 7"
-        :key="item"
-        @click="$router.push('/stock-management/1')"
-      >
+      <div class="item" v-for="item in 6" :key="item">
         <div class="left">
           <p>2023-04-11</p>
           <p class="name">Name_1</p>
-          <p>Category_1</p>
+          <p>C123123123 / Category_1</p>
         </div>
         <div class="right">
           <div class="text">
-            <p class="name">Stock In / 999</p>
-            <p>A380</p>
-          </div>
-
-          <div class="icon">
-            <ion-icon :icon="chevronForwardOutline"></ion-icon>
+            <p class="name">999</p>
+            <p>Tra9981998199</p>
           </div>
         </div>
       </div>
     </div>
   </base-layout>
 </template>
-
-<script>
-import { chevronForwardOutline } from "ionicons/icons";
-import { IonIcon } from "@ionic/vue";
-
-export default {
-  components: {
-    IonIcon,
-  },
-  data() {
-    return {
-      chevronForwardOutline,
-    };
-  },
-};
-</script>
 
 <style scoped>
 .card {
@@ -78,6 +45,7 @@ export default {
   justify-content: space-between;
   position: relative;
   border-bottom: 1px solid #e5e6eb;
+  padding: 0.5rem 0;
 }
 
 .card .item:last-of-type {
@@ -102,6 +70,8 @@ export default {
   font-size: 12px;
   line-height: 17px;
   color: #86909c;
+  margin: 0;
+  margin-bottom: 0.5rem;
 }
 
 .card .item .left p.name,

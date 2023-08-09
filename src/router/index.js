@@ -49,6 +49,11 @@ const routes = [
     component: () => import("../pages/StockManagementDetails.vue"),
   },
   {
+    path: "/sales-record",
+    name: "SalesRecord",
+    component: () => import("../pages/SalesRecord.vue"),
+  },
+  {
     path: "/profile",
     name: "Account",
     component: () => import("../pages/Account.vue"),
