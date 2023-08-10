@@ -26,8 +26,9 @@
               v-model="password"
               placeholder="Password"
               required
-              type="password"
+              :type="inputType"
             ></base-input>
+            <ion-icon @click="changeInputType" :icon="setIcon"></ion-icon>
           </div>
         </div>
         <div
@@ -56,12 +57,14 @@
 import { IonIcon, IonList, IonItem, toastController } from "@ionic/vue";
 import { useVuelidate } from "@vuelidate/core";
 import { required, email } from "@vuelidate/validators";
+import { eyeOutline, eyeOffOutline } from "ionicons/icons";
 
 export default {
   components: {
     IonIcon,
     IonList,
     IonItem,
+    IonIcon,
   },
   setup() {
     return { v$: useVuelidate() };
@@ -70,6 +73,10 @@ export default {
     return {
       email: "",
       password: "",
+      setIcon: eyeOutline,
+      inputType: "password",
+      eyeOutline,
+      eyeOffOutline,
     };
   },
   validations() {
@@ -79,6 +86,10 @@ export default {
     };
   },
   methods: {
+    changeInputType() {
+      this.setIcon = this.setIcon === eyeOutline ? eyeOffOutline : eyeOutline;
+      this.inputType = this.inputType === "password" ? "text" : "password";
+    },
     async submit() {
       this.$router.replace("/projects");
       // const result = await this.v$.$validate();
@@ -142,7 +153,7 @@ p.forgot-password {
 
 ion-icon {
   position: absolute;
-  left: 1rem;
+  right: 1rem;
   top: 50%;
   transform: translateY(-50%);
   z-index: 99;

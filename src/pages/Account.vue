@@ -31,7 +31,6 @@ export default {
   components: {
     IonIcon,
     IonCard,
-    DeleteAccountDialog,
     Language,
   },
   data() {
