@@ -10,6 +10,10 @@
         <ion-icon :icon="folderOutline"></ion-icon>
         Management
       </ion-tab-button>
+      <ion-tab-button tab="stock-taking" href="/stock-taking">
+        <ion-icon :icon="scanOutline"></ion-icon>
+        Stocktaking
+      </ion-tab-button>
       <ion-tab-button tab="sales-record" href="/sales-record">
         <ion-icon :icon="documentOutline"></ion-icon>
         Sales Record
@@ -35,6 +39,7 @@ import {
   folderOutline,
   documentOutline,
   menuOutline,
+  scanOutline,
 } from "ionicons/icons";
 
 export default {
@@ -51,6 +56,7 @@ export default {
       folderOutline,
       documentOutline,
       menuOutline,
+      scanOutline,
     };
   },
 };

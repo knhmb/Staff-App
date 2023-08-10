@@ -25,7 +25,6 @@
 <script>
 import { IonIcon, IonCard } from "@ionic/vue";
 import { chevronForwardOutline } from "ionicons/icons";
-import DeleteAccountDialog from "../components/account/DeleteAccountDialog.vue";
 import Language from "../components/base/Language.vue";
 
 export default {

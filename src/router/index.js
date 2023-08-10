@@ -1,6 +1,4 @@
 import { createRouter, createWebHistory } from "@ionic/vue-router";
-
-import CreateAccount from "../pages/CreateAccount.vue";
 import Tabs from "../components/Tabs.vue";
 
 const routes = [
@@ -49,6 +47,16 @@ const routes = [
     component: () => import("../pages/StockManagementDetails.vue"),
   },
   {
+    path: "/stock-taking",
+    name: "StockTaking",
+    component: () => import("../pages/StockTaking.vue"),
+  },
+  {
+    path: "/stock-taking/:id",
+    name: "StockTakingQuantity",
+    component: () => import("../pages/StockTakingQuantity.vue"),
+  },
+  {
     path: "/sales-record",
     name: "SalesRecord",
     component: () => import("../pages/SalesRecord.vue"),
@@ -83,43 +91,6 @@ const routes = [
     path: "/change-password",
     name: "ChangePassword",
     component: () => import("../pages/ChangePassword.vue"),
-    // beforeEnter(to, from, next) {
-    //   const isAuthenticated = localStorage.getItem("accessToken");
-    //   if (isAuthenticated) {
-    //     next();
-    //     return;
-    //   }
-    //   next("/");
-    // },
-  },
-
-  {
-    path: "/privacy-policy",
-    name: "PrivacyPolicy",
-    component: () => import("../pages/PrivacyPolicy.vue"),
-  },
-  {
-    path: "/terms-conditions",
-    name: "TermsConditions",
-    component: () => import("../pages/TermsConditions.vue"),
-  },
-  {
-    path: "/about-us",
-    name: "AboutUs",
-    component: () => import("../pages/AboutUs.vue"),
-    // beforeEnter(to, from, next) {
-    //   const isAuthenticated = localStorage.getItem("accessToken");
-    //   if (isAuthenticated) {
-    //     next();
-    //     return;
-    //   }
-    //   next("/");
-    // },
-  },
-  {
-    path: "/contact-us",
-    name: "ContactUs",
-    component: () => import("../pages/ContactUs.vue"),
     // beforeEnter(to, from, next) {
     //   const isAuthenticated = localStorage.getItem("accessToken");
     //   if (isAuthenticated) {

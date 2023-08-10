@@ -1,14 +1,12 @@
 <template>
   <ion-modal id="example-modal" ref="modal" trigger="open-delete-dialog">
     <div class="wrapper">
-      <h4>Delete Account</h4>
-      <p>
-        Are you sure you want to delete your account? <br />
-        Once you confirm this action, the account will be deleted immediately.
-        You can’t undo this action.
-      </p>
-      <base-button @click="confirm">Delete My Account</base-button>
-      <base-button @click="cancel">Back</base-button>
+      <h4>Complete Stocktaking</h4>
+      <p>Have you complete the stocktaking?</p>
+      <div class="btn-content">
+        <base-button @click="cancel">No</base-button>
+        <base-button @click="confirm">Yes</base-button>
+      </div>
     </div>
   </ion-modal>
 </template>
@@ -54,7 +52,7 @@ ion-modal#example-modal {
 
 ion-modal#example-modal h4 {
   color: var(--ion-text-color-primary);
-  text-align: center;
+  text-align: left;
   font-family: var(--ion-font-family);
   font-size: 18px;
   font-style: normal;
@@ -69,12 +67,18 @@ ion-modal#example-modal h4 {
 
 ion-modal#example-modal p {
   color: #4e5969;
-  text-align: center;
+  text-align: left;
   font-family: var(--ion-font-family);
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 140%;
+}
+
+.btn-content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 ion-modal#example-modal ion-button {
@@ -83,28 +87,20 @@ ion-modal#example-modal ion-button {
   font-style: normal;
   font-weight: 400;
   line-height: 140%;
-  width: 100%;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  --background: #f53f3f;
-  --color: var(--ion-color-primary-contrast);
-  --background-activated: #eb7b7bc7;
-}
-
-ion-modal#example-modal ion-button:nth-of-type(2) {
-  --background: var(--ion-color-primary-contrast);
-  --border-color: #e5e6eb;
-  --border-width: 2px;
-  --border-style: solid;
-  --color: #86909c;
-  margin-top: 0.5rem;
-  --background-activated: var(--ion-color-primary-contrast);
+  --color: var(--ion-text-color-primary-contrast);
+  background: none;
+  border: none;
 }
 
 ion-modal#example-modal ion-button::part(native) {
-  width: 100%;
-  margin-left: auto;
-  margin-right: 20px;
+  background: none;
+  border: none;
+}
+
+ion-modal#example-modal ion-button::part(native) {
+  /* width: 100%; */
+  /* margin-left: auto;
+  margin-right: 20px; */
 }
 
 ion-modal#example-modal .wrapper {
