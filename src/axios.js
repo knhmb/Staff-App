@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:3001/";
+axios.defaults.baseURL = "https://net-to-shop-warehouse.dev.marvelconnect.com/";
 
 const setAuthHeader = (token) => {
   if (token) {

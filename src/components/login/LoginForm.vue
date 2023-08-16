@@ -45,9 +45,7 @@
         </p>
       </ion-item>
       <ion-item lines="none">
-        <base-button class="account-btn" router-link="/storage"
-          >Login</base-button
-        >
+        <base-button class="account-btn" @click="submit">Login</base-button>
       </ion-item>
     </ion-list>
   </form>
@@ -56,7 +54,7 @@
   <script>
 import { IonIcon, IonList, IonItem, toastController } from "@ionic/vue";
 import { useVuelidate } from "@vuelidate/core";
-import { required, email } from "@vuelidate/validators";
+import { required } from "@vuelidate/validators";
 import { eyeOutline, eyeOffOutline } from "ionicons/icons";
 
 export default {
@@ -81,7 +79,7 @@ export default {
   },
   validations() {
     return {
-      email: { required, email },
+      email: { required },
       password: { required },
     };
   },
@@ -91,25 +89,24 @@ export default {
       this.inputType = this.inputType === "password" ? "text" : "password";
     },
     async submit() {
-      this.$router.replace("/projects");
-      // const result = await this.v$.$validate();
-      // if (!result) {
-      //   return;
-      // }
-      // // perform async actions
-      // const data = {
-      //   username: this.email,
-      //   password: this.password,
-      // };
-      // this.$store
-      //   .dispatch("auth/login", data)
-      //   .then(() => {
-      //     this.presentToast("LoggedIn!", "success");
-      //     this.$router.replace("/news");
-      //   })
-      //   .catch((err) => {
-      //     this.presentToast(err.response.data.message, "warning");
-      //   });
+      const result = await this.v$.$validate();
+      if (!result) {
+        return;
+      }
+      // perform async actions
+      const data = {
+        username: this.email,
+        password: this.password,
+      };
+      this.$store
+        .dispatch("auth/login", data)
+        .then(() => {
+          this.presentToast("LoggedIn!", "success");
+          this.$router.replace("/storage");
+        })
+        .catch((err) => {
+          this.presentToast(err.response.data.message, "warning");
+        });
     },
     async presentToast(message, color) {
       const toast = await toastController.create({

@@ -1,42 +1,33 @@
 import axios from "axios";
 
 export default {
-  async getNews(context) {
-    const response = await axios.get("api/v1/news");
-    context.commit("SET_NEWS", response.data.items);
+  async getWarehouseItems(context) {
+    const response = await axios.get("api/v1/warehouses/items");
+    context.commit("SET_WAREHOUSE_ITEMS", response.data.items);
   },
-  async getImageBlob(context, payload) {
-    const response = await axios.get(`/api/v1/system/uploads/${payload}`, {
-      responseType: "blob",
+  async getSalesRecord(context) {
+    // const response = await axios.get("api/v1/transactions");
+    const response = await axios.get("api/v1/transactions/sales-record");
+    context.commit("SET_SALES_RECORD", response.data.items);
+  },
+  async getItemCategories(context) {
+    const response = await axios.get("api/v1/items/categories");
+    context.commit("SET_ITEM_CATEGORIES", response.data.items);
+  },
+  async getItemItems(context, payload) {
+    const response = await axios.get("api/v1/items/items", {
+      params: {
+        filter: payload ? `category:${payload}` : undefined,
+      },
     });
-    const url = URL.createObjectURL(response.data);
-    context.commit("SET_BLOB_IMAGE", url);
+    context.commit("SET_ITEM_ITEMS", response.data.items);
   },
-  async getNewsDetail(context, payload) {
-    const response = await axios.get(`api/v1/news/${payload}`);
-    context.commit("SET_NEWS_DETAIL", response.data.item);
+  async getTransactionTypes(context) {
+    const response = await axios.get("api/v1/transactions/types");
+    context.commit("SET_TRANSACTION_TYPES", response.data.items);
   },
-  async getCourseCategory(context) {
-    const response = await axios.get("api/v1/course/category");
-    context.commit("SET_COURSE_CATEGORY", response.data.items);
-  },
-  async getCourses(context) {
-    const response = await axios.get("api/v1/course/management");
-    context.commit("SET_COURSES", response.data.items);
-  },
-  async getCourseDetail(context, payload) {
-    const response = await axios.get(`api/v1/course/management/${payload}`);
-    context.commit("SET_COURSE_DETAIL", response.data.item);
-  },
-  async reservation(_, payload) {
-    await axios.post("api/v1/reservation", payload);
-  },
-  async getCms(context) {
-    const response = await axios.get("api/v1/cms/contents");
-    context.commit("SET_CMS", response.data.items);
-  },
-  async getReservations(context) {
-    const response = await axios.get("api/v1/reservation");
-    context.commit("SET_RESERVATIONS", response.data.items);
+  async getWarehouses(context) {
+    const response = await axios.get("api/v1/warehouses");
+    context.commit("SET_WAREHOUSES", response.data.items);
   },
 };

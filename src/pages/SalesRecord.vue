@@ -14,22 +14,38 @@
           </div>
         </div>
       </div>
-      <div class="item" v-for="item in 6" :key="item">
+      <div class="item" v-for="item in salesRecord" :key="item.id">
         <div class="left">
-          <p>2023-04-11</p>
-          <p class="name">Name_1</p>
-          <p>C123123123 / Category_1</p>
+          <p>{{ item.createdAt }}</p>
+          <p class="name">{{ item.resources.itemItem.name }}</p>
+          <p>
+            {{ item.resources.itemItem.code }} /
+            {{ item.resources.itemCategory.name }}
+          </p>
         </div>
         <div class="right">
           <div class="text">
-            <p class="name">999</p>
-            <p>Tra9981998199</p>
+            <p class="name">{{ item.quantity }}</p>
+            <p>{{ item.transactionId }}</p>
           </div>
         </div>
       </div>
     </div>
   </base-layout>
 </template>
+
+<script>
+export default {
+  computed: {
+    salesRecord() {
+      return this.$store.getters["dashboard/salesRecord"];
+    },
+  },
+  created() {
+    this.$store.dispatch("dashboard/getSalesRecord");
+  },
+};
+</script>
 
 <style scoped>
 .card {

@@ -6,14 +6,13 @@ export default {
   namespaced: true,
   state() {
     return {
-      news: [],
-      blobImage: "",
-      newsDetail: {},
-      courseCategories: [],
-      courses: [],
-      courseDetail: {},
-      cms: [],
-      reservations: [],
+      warehouseItems: [],
+      salesRecord: [],
+      itemCategories: [],
+      transactionTypes: [],
+      itemItems: [],
+      warehouses: [],
+      selectedWarehouse: "",
     };
   },
   getters,

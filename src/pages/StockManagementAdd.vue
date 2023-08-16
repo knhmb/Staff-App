@@ -11,15 +11,27 @@
         </ion-item>
         <ion-item lines="none">
           <ion-select
+            v-model="itemCategory"
             :toggle-icon="chevronDown"
             placeholder="Item Category"
-          ></ion-select>
+          >
+            <ion-select-option
+              v-for="item in itemCategories"
+              :key="item.id"
+              :value="item.id"
+              >{{ item.name }}</ion-select-option
+            >
+          </ion-select>
         </ion-item>
         <ion-item lines="none">
-          <ion-select
-            :toggle-icon="chevronDown"
-            placeholder="Item Name"
-          ></ion-select>
+          <ion-select :toggle-icon="chevronDown" placeholder="Item Name">
+            <ion-select-option
+              v-for="item in itemItems"
+              :key="item.id"
+              :value="item.id"
+              >{{ item.name }}</ion-select-option
+            >
+          </ion-select>
         </ion-item>
         <ion-item lines="none">
           <ion-select
@@ -28,10 +40,14 @@
           ></ion-select>
         </ion-item>
         <ion-item lines="none">
-          <ion-select
-            :toggle-icon="chevronDown"
-            placeholder="Transaction Type"
-          ></ion-select>
+          <ion-select :toggle-icon="chevronDown" placeholder="Transaction Type">
+            <ion-select-option
+              v-for="item in transactionTypes"
+              :key="item.id"
+              :value="item.id"
+              >{{ item.name }}</ion-select-option
+            >
+          </ion-select>
         </ion-item>
         <ion-item lines="none">
           <base-input placeholder="Quantity"></base-input>
@@ -85,6 +101,7 @@ export default {
         password: "",
         confirm: "",
       },
+      itemCategory: "",
     };
   },
   validations() {
@@ -102,6 +119,22 @@ export default {
       },
       email: { required, email },
     };
+  },
+  watch: {
+    itemCategory(newVal) {
+      this.$store.dispatch("dashboard/getItemItems", newVal);
+    },
+  },
+  computed: {
+    itemCategories() {
+      return this.$store.getters["dashboard/itemCategories"];
+    },
+    itemItems() {
+      return this.$store.getters["dashboard/itemItems"];
+    },
+    transactionTypes() {
+      return this.$store.getters["dashboard/transactionTypes"];
+    },
   },
   methods: {
     async submit() {
@@ -121,6 +154,11 @@ export default {
       // this.$store.commit("auth/SET_SIGNUP_DATA", data);
       // this.$router.push("/create-account-2");
     },
+  },
+  created() {
+    this.$store.dispatch("dashboard/getItemCategories");
+    this.$store.dispatch("dashboard/getItemItems");
+    this.$store.dispatch("dashboard/getTransactionTypes");
   },
 };
 </script>

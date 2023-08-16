@@ -43,9 +43,6 @@ export default {
       this.$router.replace("/login");
     },
   },
-  created() {
-    this.$store.dispatch("dashboard/getCms");
-  },
 };
 </script>
 

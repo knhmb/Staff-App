@@ -8,8 +8,8 @@ export default {
   async newAccountOTP(_, payload) {
     axios.post("api/v1/accounts/new-account-otp", payload);
   },
-  async forgotPasswordOTP(_, payload) {
-    axios.post("api/v1/accounts/change-password-otp", payload);
+  async forgotPassword(_, payload) {
+    axios.post("api/v1/accounts/forget-password", payload);
   },
   async login(context, payload) {
     const response = await axios.post("api/v1/authenticate", payload);

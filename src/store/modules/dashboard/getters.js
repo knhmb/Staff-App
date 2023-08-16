@@ -1,26 +1,23 @@
 export default {
-  news(state) {
-    return state.news;
+  warehouseItems(state) {
+    return state.warehouseItems;
   },
-  blobImage(state) {
-    return state.blobImage;
+  salesRecord(state) {
+    return state.salesRecord;
   },
-  newsDetail(state) {
-    return state.newsDetail;
+  itemCategories(state) {
+    return state.itemCategories;
   },
-  courseCategories(state) {
-    return state.courseCategories;
+  transactionTypes(state) {
+    return state.transactionTypes;
   },
-  courses(state) {
-    return state.courses;
+  itemItems(state) {
+    return state.itemItems;
   },
-  courseDetail(state) {
-    return state.courseDetail;
+  warehouses(state) {
+    return state.warehouses;
   },
-  cms(state) {
-    return state.cms;
-  },
-  reservations(state) {
-    return state.reservations;
+  selectedWarehouse(state) {
+    return state.selectedWarehouse;
   },
 };

@@ -10,10 +10,17 @@
           label-placement="floating"
           fill="outline"
           interface="popover"
+          v-model="itemWarehouse"
         >
-          <ion-select-option value="locationA">Location A</ion-select-option>
+          <ion-select-option
+            v-for="item in warehouseItems"
+            :key="item.id"
+            :value="item.warehouse"
+            >{{ item.warehouse }}</ion-select-option
+          >
+          <!-- <ion-select-option value="locationA">Location A</ion-select-option>
           <ion-select-option value="locationB">Location B</ion-select-option>
-          <ion-select-option value="locationC">Location C</ion-select-option>
+          <ion-select-option value="locationC">Location C</ion-select-option> -->
         </ion-select>
       </div>
     </div>
@@ -32,7 +39,20 @@ export default {
     IonSelectOption,
   },
   data() {
-    return { searchOutline };
+    return { searchOutline, itemWarehouse: "" };
+  },
+  watch: {
+    itemWarehouse(newVal) {
+      this.$store.commit("dashboard/SET_SELECTED_WAREHOUSE", newVal);
+    },
+  },
+  computed: {
+    warehouses() {
+      return this.$store.getters["dashboard/warehouses"];
+    },
+    warehouseItems() {
+      return this.$store.getters["dashboard/warehouseItems"];
+    },
   },
   mounted() {
     const select = document.querySelector("ion-select");
@@ -40,6 +60,10 @@ export default {
     select.interfaceOptions = {
       cssClass: "custom-popover",
     };
+  },
+  created() {
+    this.$store.dispatch("dashboard/getWarehouseItems");
+    this.$store.dispatch("dashboard/getWarehouses");
   },
 };
 </script>

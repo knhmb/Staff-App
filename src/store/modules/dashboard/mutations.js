@@ -1,26 +1,23 @@
 export default {
-  SET_NEWS(state, payload) {
-    state.news = payload;
+  SET_WAREHOUSE_ITEMS(state, payload) {
+    state.warehouseItems = payload;
   },
-  SET_BLOB_IMAGE(state, payload) {
-    state.blobImage = payload;
+  SET_SALES_RECORD(state, payload) {
+    state.salesRecord = payload;
   },
-  SET_NEWS_DETAIL(state, payload) {
-    state.newsDetail = payload;
+  SET_ITEM_CATEGORIES(state, payload) {
+    state.itemCategories = payload;
   },
-  SET_COURSE_CATEGORY(state, payload) {
-    state.courseCategories = payload;
+  SET_TRANSACTION_TYPES(state, payload) {
+    state.transactionTypes = payload;
   },
-  SET_COURSES(state, payload) {
-    state.courses = payload;
+  SET_ITEM_ITEMS(state, payload) {
+    state.itemItems = payload;
   },
-  SET_COURSE_DETAIL(state, payload) {
-    state.courseDetail = payload;
+  SET_WAREHOUSES(state, payload) {
+    state.warehouses = payload;
   },
-  SET_CMS(state, payload) {
-    state.cms = payload;
-  },
-  SET_RESERVATIONS(state, payload) {
-    state.reservations = payload;
+  SET_SELECTED_WAREHOUSE(state, payload) {
+    state.selectedWarehouse = payload;
   },
 };

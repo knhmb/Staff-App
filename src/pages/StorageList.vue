@@ -4,7 +4,9 @@
     page-title="Storage"
     :add-padding="true"
   >
-    <p>Location: <span>Location A</span></p>
+    <p>
+      Location: <span>{{ singleWarehouse[0].warehouse }}</span>
+    </p>
     <div class="card">
       <div class="item">
         <div class="left">
@@ -17,20 +19,44 @@
           <p>Bin Location (Warehouse) code</p>
         </div>
       </div>
-      <div class="item" v-for="item in 7" :key="item">
+      <div class="item" v-for="item in singleWarehouse" :key="item">
         <div class="left">
-          <p class="name">Name_1</p>
-          <p>Category_1</p>
-          <p>C123123123</p>
+          <p class="name">{{ item.resources.item.name }}</p>
+          <p>{{ item.resources.itemCategory.name }}</p>
+          <p>{{ item.resources.item.code }}</p>
         </div>
         <div class="right">
-          <p class="name">999</p>
-          <p>A380</p>
+          <p class="name">{{ item.quantity }}</p>
+          <p>{{ item.resources.warehouse.code }}</p>
         </div>
       </div>
     </div>
   </base-layout>
 </template>
+
+<script>
+export default {
+  computed: {
+    warehouseItems() {
+      return this.$store.getters["dashboard/warehouseItems"];
+    },
+    selectedWarehouse() {
+      return this.$store.getters["dashboard/selectedWarehouse"];
+    },
+    singleWarehouse() {
+      if (this.selectedWarehouse) {
+        return this.warehouseItems.filter(
+          (item) => item.warehouse === this.selectedWarehouse
+        );
+      }
+      return this.warehouseItems;
+    },
+  },
+  created() {
+    console.log(this.singleWarehouse);
+  },
+};
+</script>
 
 <style scoped>
 p {
