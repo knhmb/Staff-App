@@ -30,4 +30,7 @@ export default {
     const response = await axios.get("api/v1/warehouses");
     context.commit("SET_WAREHOUSES", response.data.items);
   },
+  async addStock(_, payload) {
+    await axios.post("api/v1/transactions/import", payload);
+  },
 };

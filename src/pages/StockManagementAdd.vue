@@ -7,60 +7,148 @@
     <form>
       <ion-list>
         <ion-item lines="none">
-          <base-input placeholder="Date"></base-input>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-select
-            v-model="itemCategory"
-            :toggle-icon="chevronDown"
-            placeholder="Item Category"
+          <div class="full-width" :class="{ error: v$.date.$errors.length }">
+            <base-input placeholder="Date"></base-input>
+          </div>
+          <div
+            class="input-errors"
+            v-for="error of v$.date.$errors"
+            :key="error.$uid"
           >
-            <ion-select-option
-              v-for="item in itemCategories"
-              :key="item.id"
-              :value="item.id"
-              >{{ item.name }}</ion-select-option
+            <div class="error-msg">{{ error.$message }}</div>
+          </div>
+        </ion-item>
+        <ion-item lines="none">
+          <div
+            class="full-width"
+            :class="{ error: v$.itemCategory.$errors.length }"
+          >
+            <ion-select
+              v-model="itemCategory"
+              :toggle-icon="chevronDown"
+              placeholder="Item Category"
             >
-          </ion-select>
+              <ion-select-option
+                v-for="item in itemCategories"
+                :key="item.id"
+                :value="item.id"
+                >{{ item.name }}</ion-select-option
+              >
+            </ion-select>
+          </div>
+          <div
+            class="input-errors"
+            v-for="error of v$.itemCategory.$errors"
+            :key="error.$uid"
+          >
+            <div class="error-msg">{{ error.$message }}</div>
+          </div>
         </ion-item>
         <ion-item lines="none">
-          <ion-select :toggle-icon="chevronDown" placeholder="Item Name">
-            <ion-select-option
-              v-for="item in itemItems"
-              :key="item.id"
-              :value="item.id"
-              >{{ item.name }}</ion-select-option
+          <div
+            class="full-width"
+            :class="{ error: v$.itemName.$errors.length }"
+          >
+            <ion-select :toggle-icon="chevronDown" placeholder="Item Name">
+              <ion-select-option
+                v-for="item in itemItems"
+                :key="item.id"
+                :value="item.id"
+                >{{ item.name }}</ion-select-option
+              >
+            </ion-select>
+          </div>
+          <div
+            class="input-errors"
+            v-for="error of v$.itemName.$errors"
+            :key="error.$uid"
+          >
+            <div class="error-msg">{{ error.$message }}</div>
+          </div>
+        </ion-item>
+        <ion-item lines="none">
+          <div
+            class="full-width"
+            :class="{ error: v$.locationCode.$errors.length }"
+          >
+            <ion-select
+              :toggle-icon="chevronDown"
+              placeholder="Bin Location Code"
             >
-          </ion-select>
+              <ion-select-option
+                v-for="item in warehouses"
+                :key="item.id"
+                :value="item.code"
+                >{{ item.code }}</ion-select-option
+              >
+            </ion-select>
+          </div>
+          <div
+            class="input-errors"
+            v-for="error of v$.locationCode.$errors"
+            :key="error.$uid"
+          >
+            <div class="error-msg">{{ error.$message }}</div>
+          </div>
         </ion-item>
         <ion-item lines="none">
-          <ion-select
-            :toggle-icon="chevronDown"
-            placeholder="Bin Location Code"
-          ></ion-select>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-select :toggle-icon="chevronDown" placeholder="Transaction Type">
-            <ion-select-option
-              v-for="item in transactionTypes"
-              :key="item.id"
-              :value="item.id"
-              >{{ item.name }}</ion-select-option
+          <div
+            class="full-width"
+            :class="{ error: v$.transactionType.$errors.length }"
+          >
+            <ion-select
+              :toggle-icon="chevronDown"
+              placeholder="Transaction Type"
             >
-          </ion-select>
+              <ion-select-option
+                v-for="item in transactionTypes"
+                :key="item.id"
+                :value="item.id"
+                >{{ item.name }}</ion-select-option
+              >
+            </ion-select>
+          </div>
+          <div
+            class="input-errors"
+            v-for="error of v$.transactionType.$errors"
+            :key="error.$uid"
+          >
+            <div class="error-msg">{{ error.$message }}</div>
+          </div>
         </ion-item>
         <ion-item lines="none">
-          <base-input placeholder="Quantity"></base-input>
+          <div
+            class="full-width"
+            :class="{ error: v$.quantity.$errors.length }"
+          >
+            <base-input placeholder="Quantity"></base-input>
+          </div>
           <small
             >If you need to deduct, please add "-" (minus) in front. e.g.:
             -300</small
           >
+          <div
+            class="input-errors"
+            v-for="error of v$.quantity.$errors"
+            :key="error.$uid"
+          >
+            <div class="error-msg">{{ error.$message }}</div>
+          </div>
         </ion-item>
         <ion-item lines="none">
-          <ion-textarea placeholder="Remark"></ion-textarea>
+          <div class="full-width" :class="{ error: v$.remark.$errors.length }">
+            <ion-textarea placeholder="Remark"></ion-textarea>
+          </div>
+          <div
+            class="input-errors"
+            v-for="error of v$.remark.$errors"
+            :key="error.$uid"
+          >
+            <div class="error-msg">{{ error.$message }}</div>
+          </div>
         </ion-item>
         <!-- <ion-item lines="none"> -->
-        <base-button>Save</base-button>
+        <base-button @click="submit">Save</base-button>
         <!-- </ion-item> -->
       </ion-list>
     </form>
@@ -77,7 +165,7 @@ import {
   IonSelectOption,
 } from "@ionic/vue";
 import { useVuelidate } from "@vuelidate/core";
-import { required, email, minLength, sameAs } from "@vuelidate/validators";
+import { required } from "@vuelidate/validators";
 import { chevronDown } from "ionicons/icons";
 
 export default {
@@ -95,29 +183,24 @@ export default {
   data() {
     return {
       chevronDown,
-      username: "",
-      email: "",
-      password: {
-        password: "",
-        confirm: "",
-      },
       itemCategory: "",
+      date: "",
+      itemName: "",
+      transactionType: "",
+      locationCode: "",
+      quantity: "",
+      remark: "",
     };
   },
   validations() {
     return {
-      username: { required, minLength: minLength(4) },
-      password: {
-        password: {
-          required,
-          minLength: minLength(6),
-        },
-        confirm: {
-          required,
-          sameAs: sameAs(this.password.password),
-        },
-      },
-      email: { required, email },
+      itemCategory: { required },
+      date: { required },
+      itemName: { required },
+      transactionType: { required },
+      remark: { required },
+      locationCode: { required },
+      quantity: { required },
     };
   },
   watch: {
@@ -135,6 +218,9 @@ export default {
     transactionTypes() {
       return this.$store.getters["dashboard/transactionTypes"];
     },
+    warehouses() {
+      return this.$store.getters["dashboard/warehouses"];
+    },
   },
   methods: {
     async submit() {
@@ -144,15 +230,15 @@ export default {
       }
       // perform async actions
       const data = {
-        username: this.username,
-        password: this.password.password,
-        password2: this.password.confirm,
-        phone: this.phone,
-        email: this.email,
+        date: this.date,
+        itemCategory: this.itemCategory,
+        itemName: this.itemName,
+        locationCode: this.locationCode,
+        transactionType: this.transactionType,
+        remark: this.remark,
+        quantity: this.quantity,
       };
       console.log(data);
-      // this.$store.commit("auth/SET_SIGNUP_DATA", data);
-      // this.$router.push("/create-account-2");
     },
   },
   created() {
@@ -215,5 +301,9 @@ ion-item::part(native) {
 .input-errors {
   width: 100%;
   text-align: start;
+}
+
+div.full-width {
+  width: 100%;
 }
 </style>
