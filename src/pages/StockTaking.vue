@@ -61,7 +61,11 @@ export default {
         console.log(result.content);
         // this.$store.commit("dashboard/SET_SCANNED_PRODUCT_ID", result.content);
         this.$store.dispatch("dashboard/getStocktakes").then(() => {
-          this.$router.push({ name: "StockTakingQuantity" });
+          this.$router.push({
+            name: "StockTakingQuantity",
+            params: { id: result.content },
+            query: { location: this.itemWarehouse },
+          });
           // this.$router.push(`/stock-taking/${result.content}`);
         });
       }

@@ -1,10 +1,13 @@
 <template>
   <base-layout
+    v-if="singleStock"
     page-title="Stocktaking"
     :add-padding="true"
     page-back-link="/stock-taking"
   >
-    <p>Location: <span>Location A</span></p>
+    <p>
+      Location: <span>{{ singleStock.resources.warehouseItem.warehouse }}</span>
+    </p>
     <div class="card">
       <div class="item">
         <p>Item Name</p>
@@ -27,6 +30,7 @@
 </template>
 
 <script>
+import { toastController } from "@ionic/vue";
 import ConfrimStockDialog from "../components/account/ConfrimStockDialog.vue";
 
 export default {
@@ -37,9 +41,30 @@ export default {
     stocktakes() {
       return this.$store.getters["dashboard/stocktakes"];
     },
+    singleStock() {
+      return this.stocktakes.find(
+        (item) => item.resources.itemItem.code === this.$route.query.location
+      );
+    },
+  },
+  methods: {
+    async presentToast(message, color) {
+      const toast = await toastController.create({
+        message: message,
+        duration: 1500,
+        position: "top",
+        color: color,
+      });
+
+      await toast.present();
+    },
   },
   created() {
     console.log(this.stocktakes);
+    if (!this.singleStock) {
+      this.presentToast("Item not found", "warning");
+      this.$router.replace("/stock-taking");
+    }
   },
 };
 </script>
