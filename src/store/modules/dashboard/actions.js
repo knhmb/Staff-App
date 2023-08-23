@@ -6,7 +6,6 @@ export default {
     context.commit("SET_WAREHOUSE_ITEMS", response.data.items);
   },
   async getSalesRecord(context) {
-    // const response = await axios.get("api/v1/transactions");
     const response = await axios.get("api/v1/transactions/sales-record");
     context.commit("SET_SALES_RECORD", response.data.items);
   },
@@ -32,5 +31,16 @@ export default {
   },
   async addStock(_, payload) {
     await axios.post("api/v1/transactions/import", payload);
+  },
+  async getTransactions(context) {
+    const response = await axios.get("/api/v1/transactions");
+    context.commit("SET_TRANSACTIONS", response.data.items);
+  },
+  async addTransaction(_, payload) {
+    await axios.post("/api/v1/transactions", payload);
+  },
+  async getStocktakes(context) {
+    const response = await axios.get("/api/v1/stocktakes");
+    context.commit("SET_STOCKTAKES", response.data.items);
   },
 };

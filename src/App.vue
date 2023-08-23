@@ -12,6 +12,19 @@ export default {
     IonApp,
     IonRouterOutlet,
   },
+  methods: {
+    checkRefreshToken() {
+      const token = localStorage.getItem("refreshToken");
+
+      this.$store
+        .dispatch("auth/checkRefreshToken", token)
+        .then(() => {})
+        .catch(() => {
+          this.$store.commit("auth/LOGOUT");
+          this.$router.replace("/login");
+        });
+    },
+  },
   created() {
     const token = localStorage.getItem("accessToken");
     this.$store
@@ -20,8 +33,7 @@ export default {
         // this.$store.commit("auth/SET_USER_VALIDITY");
       })
       .catch(() => {
-        this.$store.commit("auth/LOGOUT");
-        this.$router.replace("/login");
+        this.checkRefreshToken();
       });
   },
 };

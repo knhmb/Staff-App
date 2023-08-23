@@ -10,10 +10,14 @@
           label-placement="floating"
           fill="outline"
           interface="popover"
+          v-model="itemWarehouse"
         >
-          <ion-select-option value="locationA">Location A</ion-select-option>
-          <ion-select-option value="locationB">Location B</ion-select-option>
-          <ion-select-option value="locationC">Location C</ion-select-option>
+          <ion-select-option
+            v-for="item in warehouses"
+            :key="item.id"
+            :value="item.id"
+            >{{ item.code }}</ion-select-option
+          >
         </ion-select>
       </div>
     </div>
@@ -22,7 +26,12 @@
 </template>
   
   <script>
-import { IonImg, IonSelect, IonSelectOption } from "@ionic/vue";
+import {
+  IonImg,
+  IonSelect,
+  IonSelectOption,
+  toastController,
+} from "@ionic/vue";
 import { searchOutline } from "ionicons/icons";
 import { BarcodeScanner } from "@capacitor-community/barcode-scanner";
 
@@ -33,18 +42,42 @@ export default {
     IonSelectOption,
   },
   data() {
-    return { searchOutline };
+    return { searchOutline, itemWarehouse: "" };
+  },
+  computed: {
+    warehouses() {
+      return this.$store.getters["dashboard/warehouses"];
+    },
   },
   methods: {
     async startScan() {
+      if (!this.itemWarehouse) {
+        this.presentToast("Please select a location", "warning");
+        return;
+      }
       BarcodeScanner.hideBackground();
       const result = await BarcodeScanner.startScan();
       if (result.hasContent) {
         console.log(result.content);
-        this.$router.push("/stock-taking/1");
+        // this.$store.commit("dashboard/SET_SCANNED_PRODUCT_ID", result.content);
+        this.$store.dispatch("dashboard/getStocktakes").then(() => {
+          this.$router.push({ name: "StockTakingQuantity" });
+          // this.$router.push(`/stock-taking/${result.content}`);
+        });
       }
     },
+    async presentToast(message, color) {
+      const toast = await toastController.create({
+        message: message,
+        duration: 1500,
+        position: "top",
+        color: color,
+      });
+
+      await toast.present();
+    },
   },
+
   mounted() {
     const select = document.querySelector("ion-select");
 
@@ -52,6 +85,9 @@ export default {
       cssClass: "custom-popover",
     };
   },
+  // created() {
+  //   this.$store.dispatch("dashboard/getStocktakes");
+  // },
 };
 </script>
   

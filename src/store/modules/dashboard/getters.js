@@ -20,4 +20,13 @@ export default {
   selectedWarehouse(state) {
     return state.selectedWarehouse;
   },
+  transactions(state) {
+    return state.transactions;
+  },
+  stocktakes(state) {
+    return state.stocktakes;
+  },
+  // scannedProduct(state) {
+  //   return state.scannedProduct;
+  // },
 };

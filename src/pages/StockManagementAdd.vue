@@ -8,7 +8,11 @@
       <ion-list>
         <ion-item lines="none">
           <div class="full-width" :class="{ error: v$.date.$errors.length }">
-            <base-input placeholder="Date"></base-input>
+            <base-input
+              v-model="date"
+              type="date"
+              placeholder="Date"
+            ></base-input>
           </div>
           <div
             class="input-errors"
@@ -49,7 +53,11 @@
             class="full-width"
             :class="{ error: v$.itemName.$errors.length }"
           >
-            <ion-select :toggle-icon="chevronDown" placeholder="Item Name">
+            <ion-select
+              v-model="itemName"
+              :toggle-icon="chevronDown"
+              placeholder="Item Name"
+            >
               <ion-select-option
                 v-for="item in itemItems"
                 :key="item.id"
@@ -74,6 +82,7 @@
             <ion-select
               :toggle-icon="chevronDown"
               placeholder="Bin Location Code"
+              v-model="locationCode"
             >
               <ion-select-option
                 v-for="item in warehouses"
@@ -99,11 +108,12 @@
             <ion-select
               :toggle-icon="chevronDown"
               placeholder="Transaction Type"
+              v-model="transactionType"
             >
               <ion-select-option
                 v-for="item in transactionTypes"
                 :key="item.id"
-                :value="item.id"
+                :value="item"
                 >{{ item.name }}</ion-select-option
               >
             </ion-select>
@@ -121,7 +131,7 @@
             class="full-width"
             :class="{ error: v$.quantity.$errors.length }"
           >
-            <base-input placeholder="Quantity"></base-input>
+            <base-input v-model="quantity" placeholder="Quantity"></base-input>
           </div>
           <small
             >If you need to deduct, please add "-" (minus) in front. e.g.:
@@ -137,7 +147,7 @@
         </ion-item>
         <ion-item lines="none">
           <div class="full-width" :class="{ error: v$.remark.$errors.length }">
-            <ion-textarea placeholder="Remark"></ion-textarea>
+            <ion-textarea v-model="remark" placeholder="Remark"></ion-textarea>
           </div>
           <div
             class="input-errors"
@@ -163,6 +173,8 @@ import {
   IonTextarea,
   IonSelect,
   IonSelectOption,
+  IonDatetime,
+  toastController,
 } from "@ionic/vue";
 import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
@@ -176,6 +188,7 @@ export default {
     IonTextarea,
     IonSelect,
     IonSelectOption,
+    IonDatetime,
   },
   setup() {
     return { v$: useVuelidate() };
@@ -231,14 +244,43 @@ export default {
       // perform async actions
       const data = {
         date: this.date,
-        itemCategory: this.itemCategory,
-        itemName: this.itemName,
-        locationCode: this.locationCode,
-        transactionType: this.transactionType,
+        item: this.itemCategory,
+        warehouseItem: this.itemName,
+        warehouse: this.locationCode,
+        transactionType: this.transactionType.id,
+        transactionId: this.transactionType.name,
         remark: this.remark,
         quantity: this.quantity,
       };
-      console.log(data);
+      this.$store
+        .dispatch("dashboard/addTransaction", data)
+        .then(() => {
+          this.presentToast("Added Successfully", "success");
+
+          this.$store.dispatch("dashboard/getTransactions").then(() => {
+            this.$router.replace("/stock-management");
+            this.date = "";
+            this.itemCategory = "";
+            this.itemName = "";
+            this.locationCode = "";
+            this.transactionType = "";
+            this.remark = "";
+            this.quantity = "";
+          });
+        })
+        .catch((err) => {
+          this.presentToast(err.response.data.message, "warning");
+        });
+    },
+    async presentToast(message, color) {
+      const toast = await toastController.create({
+        message: message,
+        duration: 1500,
+        position: "top",
+        color: color,
+      });
+
+      await toast.present();
     },
   },
   created() {

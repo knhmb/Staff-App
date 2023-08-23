@@ -24,19 +24,21 @@
       </div>
       <div
         class="item"
-        v-for="item in 7"
-        :key="item"
+        v-for="item in transactions"
+        :key="item.id"
         @click="$router.push('/stock-management/1')"
       >
         <div class="left">
-          <p>2023-04-11</p>
-          <p class="name">Name_1</p>
-          <p>Category_1</p>
+          <p>{{ item.createdAt }}</p>
+          <p class="name">{{ item.resources.itemItem.name }}</p>
+          <p>{{ item.resources.itemCategory.name }}</p>
         </div>
         <div class="right">
           <div class="text">
-            <p class="name">Stock In / 999</p>
-            <p>A380</p>
+            <p class="name">
+              {{ item.resources.transactionType.name }} / {{ item.quantity }}
+            </p>
+            <p>{{ item.resources.warehouse.code }}</p>
           </div>
 
           <div class="icon">
@@ -60,6 +62,14 @@ export default {
     return {
       chevronForwardOutline,
     };
+  },
+  computed: {
+    transactions() {
+      return this.$store.getters["dashboard/transactions"];
+    },
+  },
+  created() {
+    this.$store.dispatch("dashboard/getTransactions");
   },
 };
 </script>

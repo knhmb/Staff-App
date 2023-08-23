@@ -13,10 +13,10 @@
           v-model="itemWarehouse"
         >
           <ion-select-option
-            v-for="item in warehouseItems"
+            v-for="item in warehouses"
             :key="item.id"
-            :value="item.warehouse"
-            >{{ item.warehouse }}</ion-select-option
+            :value="item.id"
+            >{{ item.code }}</ion-select-option
           >
           <!-- <ion-select-option value="locationA">Location A</ion-select-option>
           <ion-select-option value="locationB">Location B</ion-select-option>
@@ -24,12 +24,17 @@
         </ion-select>
       </div>
     </div>
-    <base-button router-link="/storage-list">Continue</base-button>
+    <base-button @click="selectLocation">Continue</base-button>
   </base-layout>
 </template>
 
 <script>
-import { IonImg, IonSelect, IonSelectOption } from "@ionic/vue";
+import {
+  IonImg,
+  IonSelect,
+  IonSelectOption,
+  toastController,
+} from "@ionic/vue";
 import { searchOutline } from "ionicons/icons";
 
 export default {
@@ -52,6 +57,26 @@ export default {
     },
     warehouseItems() {
       return this.$store.getters["dashboard/warehouseItems"];
+    },
+  },
+  methods: {
+    selectLocation() {
+      if (!this.itemWarehouse) {
+        this.presentToast("Please select a location", "warning");
+        return;
+      }
+      this.$router.push("/storage-list");
+      this.itemWarehouse = "";
+    },
+    async presentToast(message, color) {
+      const toast = await toastController.create({
+        message: message,
+        duration: 1500,
+        position: "top",
+        color: color,
+      });
+
+      await toast.present();
     },
   },
   mounted() {

@@ -13,6 +13,9 @@ export default {
       itemItems: [],
       warehouses: [],
       selectedWarehouse: "",
+      transactions: [],
+      stocktakes: [],
+      // scannedProduct: null,
     };
   },
   getters,

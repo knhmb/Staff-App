@@ -20,4 +20,13 @@ export default {
   SET_SELECTED_WAREHOUSE(state, payload) {
     state.selectedWarehouse = payload;
   },
+  SET_TRANSACTIONS(state, payload) {
+    state.transactions = payload;
+  },
+  SET_STOCKTAKES(state, payload) {
+    state.stocktakes = payload;
+  },
+  // SET_SCANNED_PRODUCT_ID(state, payload) {
+  //   state.scannedProduct = payload
+  // }
 };

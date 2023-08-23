@@ -18,7 +18,7 @@ export default {
   async validateUser(context, payload) {
     const response = await axios.get("/api/v1/authenticate", {
       headers: {
-        Authorization: `Bearer ${payload}`,
+        authorization: `Bearer ${payload}`,
       },
     });
     context.commit("LOGIN", response.data);
@@ -28,5 +28,17 @@ export default {
   },
   async deleteAccount(_, payload) {
     await axios.delete(`api/v1/accounts/${payload}}`);
+  },
+  async checkRefreshToken(context, payload) {
+    const response = await axios.put(
+      "/api/v1/authenticate",
+      {},
+      {
+        headers: {
+          authorization: `Bearer ${payload}`,
+        },
+      }
+    );
+    context.commit("LOGIN", response.data);
   },
 };

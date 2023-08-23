@@ -33,6 +33,14 @@ export default {
   components: {
     ConfrimStockDialog,
   },
+  computed: {
+    stocktakes() {
+      return this.$store.getters["dashboard/stocktakes"];
+    },
+  },
+  created() {
+    console.log(this.stocktakes);
+  },
 };
 </script>
 
