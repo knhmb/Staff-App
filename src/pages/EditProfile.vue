@@ -17,6 +17,14 @@ export default {
   components: {
     EditProfileForm,
   },
+  // computed: {
+  //   userDetails() {
+  //     return this.$store.getters["auth/userDetails"];
+  //   },
+  // },
+  // created() {
+  //   this.$store.dispatch("auth/getUserDetails", this.userDetails.id);
+  // },
 };
 </script>
 

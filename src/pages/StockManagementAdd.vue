@@ -87,7 +87,7 @@
               <ion-select-option
                 v-for="item in warehouses"
                 :key="item.id"
-                :value="item.code"
+                :value="item.id"
                 >{{ item.code }}</ion-select-option
               >
             </ion-select>

@@ -2,6 +2,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store/store";
+import i18n from "./i18n";
 import "./axios";
 
 import BaseLayout from "./components/base/BaseLayout.vue";
@@ -34,6 +35,7 @@ const app = createApp(App)
   .use(IonicVue)
   .use(router)
   .use(store)
+  .use(i18n)
   .component("base-layout", BaseLayout)
   .component("base-button", BaseButton)
   .component("base-input", BaseInput);

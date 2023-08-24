@@ -5,4 +5,7 @@ export default {
   userDetails(state) {
     return state.userDetails;
   },
+  userData(state) {
+    return state.userData;
+  },
 };

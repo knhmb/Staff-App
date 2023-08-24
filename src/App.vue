@@ -30,7 +30,7 @@ export default {
     this.$store
       .dispatch("auth/validateUser", token)
       .then(() => {
-        // this.$store.commit("auth/SET_USER_VALIDITY");
+        this.$router.replace("/storage");
       })
       .catch(() => {
         this.checkRefreshToken();

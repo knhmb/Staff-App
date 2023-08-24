@@ -8,6 +8,7 @@ export default {
     return {
       signUpData: {},
       userDetails: {},
+      userData: {},
     };
   },
   getters,

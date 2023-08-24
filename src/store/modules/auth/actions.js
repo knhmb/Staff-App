@@ -41,4 +41,19 @@ export default {
     );
     context.commit("LOGIN", response.data);
   },
+  // async getUserDetails(context, payload) {
+  //   const response = await axios.get(`api/v1/accounts/${payload}`);
+  //   context.commit("SET_UPDATED_USER_DETIALS", response.data.item);
+  // },
+  async updateUser(context, payload) {
+    const response = await axios.put(
+      `api/v1/accounts/${payload.id}`,
+      payload.data
+    );
+    context.commit("SET_UPDATED_USER_DETIALS", response.data.item);
+  },
+  async logout(context) {
+    await axios.delete("api/v1/authenticate");
+    context.commit("LOGOUT");
+  },
 };

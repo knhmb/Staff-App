@@ -40,7 +40,9 @@ export default {
   },
   methods: {
     logout() {
-      this.$router.replace("/login");
+      this.$store.dispatch("auth/logout").then(() => {
+        this.$router.replace("/login");
+      });
     },
   },
 };

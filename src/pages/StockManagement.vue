@@ -30,8 +30,16 @@
       >
         <div class="left">
           <p>{{ item.createdAt }}</p>
-          <p class="name">{{ item.resources.itemItem.name }}</p>
-          <p>{{ item.resources.itemCategory.name }}</p>
+          <p class="name">
+            {{ item.resources.itemItem ? item.resources.itemItem.name : "N/A" }}
+          </p>
+          <p>
+            {{
+              item.resources.itemCategory
+                ? item.resources.itemCategory.name
+                : "N/A"
+            }}
+          </p>
         </div>
         <div class="right">
           <div class="text">

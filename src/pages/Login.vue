@@ -2,7 +2,7 @@
   <base-layout :hide-header="true" :hide-footer="true" :add-padding="true">
     <language></language>
     <ion-img src="/assets/logo.png"></ion-img>
-    <p>Login to your account</p>
+    <p>{{ $t("auth.login_to_account") }}</p>
     <login-form></login-form>
   </base-layout>
 </template>
