@@ -11,18 +11,18 @@
     <div class="card">
       <div class="item">
         <p>Item Name</p>
-        <p>Name_1</p>
+        <p>{{ singleStock.resources.itemItem.name }}</p>
       </div>
       <div class="item">
         <p>Item Category</p>
-        <p>Category_1</p>
+        <p>{{ singleStock.resources.itemItem.category }}</p>
       </div>
       <div class="item">
         <p>Item Code</p>
-        <p>C123123123</p>
+        <p>{{ singleStock.resources.itemItem.code }}</p>
       </div>
     </div>
-    <base-input placeholder="Quantity"></base-input>
+    <base-input v-model="quantity" placeholder="Quantity"></base-input>
     <base-button>Continue</base-button>
     <base-button id="open-delete-dialog" class="complete">Complete</base-button>
     <confrim-stock-dialog></confrim-stock-dialog>
@@ -31,12 +31,27 @@
 
 <script>
 import { toastController } from "@ionic/vue";
+// import { useVuelidate } from "@vuelidate/core";
+// import { required } from "@vuelidate/validators";
 import ConfrimStockDialog from "../components/account/ConfrimStockDialog.vue";
 
 export default {
   components: {
     ConfrimStockDialog,
   },
+  // setup() {
+  //   return { v$: useVuelidate() };
+  // },
+  data() {
+    return {
+      quantity: "",
+    };
+  },
+  // validations() {
+  //   return {
+  //     quantity: { required },
+  //   };
+  // },
   computed: {
     stocktakes() {
       return this.$store.getters["dashboard/stocktakes"];
@@ -48,6 +63,28 @@ export default {
     },
   },
   methods: {
+    async submit() {
+      const result = await this.v$.$validate();
+      if (!result) {
+        return;
+      }
+      // perform async actions
+      const data = {
+        quantity: this.quantity,
+      };
+
+      if (!this.quantity) {
+        this.presentToast("Please enter a quantity", "warning");
+        return;
+      }
+
+      if (typeof this.quantity !== "number") {
+        this.presentToast("Please enter a valid number", "warning");
+        return;
+      }
+
+      // this.$store.dispatch('dashboard/updateStock', {id: this.singleStock.id, data})
+    },
     async presentToast(message, color) {
       const toast = await toastController.create({
         message: message,
