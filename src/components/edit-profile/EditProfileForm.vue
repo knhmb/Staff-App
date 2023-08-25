@@ -45,11 +45,13 @@
 </template>
 
 <script>
-import { IonList, IonItem, IonIcon, toastController } from "@ionic/vue";
+import { IonList, IonItem, IonIcon } from "@ionic/vue";
 import { useVuelidate } from "@vuelidate/core";
 import { required, minLength } from "@vuelidate/validators";
+import utils from "../../mixins/spinner";
 
 export default {
+  mixins: [utils],
   components: {
     IonList,
     IonItem,
@@ -97,16 +99,6 @@ export default {
         .catch((err) => {
           this.presentToast(err.response.data.message, "warning");
         });
-    },
-    async presentToast(message, color) {
-      const toast = await toastController.create({
-        message: message,
-        duration: 1500,
-        position: "top",
-        color: color,
-      });
-
-      await toast.present();
     },
   },
   created() {

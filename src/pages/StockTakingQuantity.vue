@@ -30,12 +30,13 @@
 </template>
 
 <script>
-import { toastController } from "@ionic/vue";
 // import { useVuelidate } from "@vuelidate/core";
 // import { required } from "@vuelidate/validators";
 import ConfrimStockDialog from "../components/account/ConfrimStockDialog.vue";
+import utils from "../../mixins/spinner";
 
 export default {
+  mixins: [utils],
   components: {
     ConfrimStockDialog,
   },
@@ -84,16 +85,6 @@ export default {
       }
 
       // this.$store.dispatch('dashboard/updateStock', {id: this.singleStock.id, data})
-    },
-    async presentToast(message, color) {
-      const toast = await toastController.create({
-        message: message,
-        duration: 1500,
-        position: "top",
-        color: color,
-      });
-
-      await toast.present();
     },
   },
   created() {

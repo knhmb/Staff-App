@@ -52,12 +52,14 @@
 </template>
   
   <script>
-import { IonIcon, IonList, IonItem, toastController } from "@ionic/vue";
+import { IonIcon, IonList, IonItem } from "@ionic/vue";
 import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { eyeOutline, eyeOffOutline } from "ionicons/icons";
+import utils from "../../mixins/spinner";
 
 export default {
+  mixins: [utils],
   components: {
     IonIcon,
     IonList,
@@ -89,10 +91,15 @@ export default {
       this.inputType = this.inputType === "password" ? "text" : "password";
     },
     async submit() {
+      console.log(this.showLoading());
       const result = await this.v$.$validate();
       if (!result) {
         return;
       }
+
+      const loading = await this.showLoading();
+      loading.present();
+
       // perform async actions
       const data = {
         username: this.email,
@@ -101,22 +108,14 @@ export default {
       this.$store
         .dispatch("auth/login", data)
         .then(() => {
+          loading.dismiss();
           this.presentToast("LoggedIn!", "success");
           this.$router.replace("/storage");
         })
         .catch((err) => {
+          loading.dismiss();
           this.presentToast(err.response.data.message, "warning");
         });
-    },
-    async presentToast(message, color) {
-      const toast = await toastController.create({
-        message: message,
-        duration: 1500,
-        position: "top",
-        color: color,
-      });
-
-      await toast.present();
     },
   },
 };
