@@ -44,5 +44,6 @@ export default {
     added_successfully: "Added Successfully",
     updated_successfully: "Updated Successfully",
     transaction_deleted: "Transaction Deleted",
+    select_location: "Please select a location",
   },
 };

@@ -54,7 +54,7 @@ export default {
   methods: {
     async startScan() {
       if (!this.itemWarehouse) {
-        this.presentToast("Please select a location", "warning");
+        this.presentToast(this.$t("message.select_location"), "warning");
         return;
       }
       BarcodeScanner.hideBackground();

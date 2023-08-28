@@ -62,7 +62,7 @@ export default {
   methods: {
     selectLocation() {
       if (!this.itemWarehouse) {
-        this.presentToast("Please select a location", "warning");
+        this.presentToast(this.$t("message.select_location"), "warning");
         return;
       }
       this.$router.push("/storage-list");
