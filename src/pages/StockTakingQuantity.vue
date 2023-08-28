@@ -25,7 +25,7 @@
     <base-input v-model="quantity" placeholder="Quantity"></base-input>
     <base-button>Continue</base-button>
     <base-button id="open-delete-dialog" class="complete">Complete</base-button>
-    <confrim-stock-dialog></confrim-stock-dialog>
+    <confrim-stock-dialog @updateStock="submit"></confrim-stock-dialog>
   </base-layout>
 </template>
 
@@ -65,11 +65,6 @@ export default {
   },
   methods: {
     async submit() {
-      const result = await this.v$.$validate();
-      if (!result) {
-        return;
-      }
-      // perform async actions
       const data = {
         quantity: this.quantity,
       };
@@ -84,7 +79,13 @@ export default {
         return;
       }
 
-      // this.$store.dispatch('dashboard/updateStock', {id: this.singleStock.id, data})
+      this.$store
+        .dispatch("dashboard/updateStock", { id: this.singleStock.id, data })
+        .then(() => {
+          this.$store.dispatch("dashboard/getStocktakes");
+          this.presentToast("Stock updated", "success");
+          this.$router.replace("/stock-taking");
+        });
     },
   },
   created() {

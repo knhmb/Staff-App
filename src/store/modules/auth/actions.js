@@ -6,10 +6,10 @@ export default {
     console.log(response);
   },
   async newAccountOTP(_, payload) {
-    axios.post("api/v1/accounts/new-account-otp", payload);
+    await axios.post("api/v1/accounts/new-account-otp", payload);
   },
   async forgotPassword(_, payload) {
-    axios.post("api/v1/accounts/forget-password", payload);
+    await axios.post("api/v1/accounts/forget-password", payload);
   },
   async login(context, payload) {
     const response = await axios.post("api/v1/authenticate", payload);
@@ -55,5 +55,8 @@ export default {
   async logout(context) {
     await axios.delete("api/v1/authenticate");
     context.commit("LOGOUT");
+  },
+  async verifyOTP(_, payload) {
+    await axios.post("api/v1/accounts/verify-otp", payload);
   },
 };

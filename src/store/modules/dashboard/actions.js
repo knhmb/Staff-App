@@ -43,4 +43,7 @@ export default {
     const response = await axios.get("/api/v1/stocktakes");
     context.commit("SET_STOCKTAKES", response.data.items);
   },
+  async updateStock(_, payload) {
+    await axios.put(`/api/v1/stocktakes/${payload.id}`, payload.data);
+  },
 };

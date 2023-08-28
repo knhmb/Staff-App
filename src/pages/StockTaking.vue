@@ -34,8 +34,10 @@ import {
 } from "@ionic/vue";
 import { searchOutline } from "ionicons/icons";
 import { BarcodeScanner } from "@capacitor-community/barcode-scanner";
+import utils from "../../mixins/spinner";
 
 export default {
+  mixins: [utils],
   components: {
     IonImg,
     IonSelect,
@@ -70,21 +72,9 @@ export default {
         });
       }
     },
-    async presentToast(message, color) {
-      const toast = await toastController.create({
-        message: message,
-        duration: 1500,
-        position: "top",
-        color: color,
-      });
-
-      await toast.present();
-    },
   },
-
   mounted() {
     const select = document.querySelector("ion-select");
-
     select.interfaceOptions = {
       cssClass: "custom-popover",
     };

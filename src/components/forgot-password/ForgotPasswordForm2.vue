@@ -77,40 +77,30 @@ export default {
     };
   },
   methods: {
-    async sendOtp() {
-      const result = await this.v$.email.$validate();
+    async submit() {
+      const result = await this.v$.$validate();
       if (!result) {
         return;
       }
+      // perform async actions
+      const loading = await this.showLoading();
+      loading.present();
+      const data = {
+        email: this.email,
+        password: this.password,
+        password2: this.confirmPassword,
+      };
       this.$store
-        .dispatch("auth/forgotPasswordOTP", { email: this.email })
+        .dispatch("auth/resetPassword", data)
         .then(() => {
-          this.presentToast("OTP has been sent!", "success");
+          loading.dismiss();
+          this.presentToast("Password Changed!", "success");
+          this.$router.replace("/login");
         })
         .catch((err) => {
+          loading.dismiss();
           this.presentToast(err.response.data.message, "warning");
         });
-    },
-    async submit() {
-      // const result = await this.v$.$validate();
-      // if (!result) {
-      //   return;
-      // }
-      // // perform async actions
-      // const data = {
-      //   email: this.email,
-      //   password: this.password,
-      //   password2: this.confirmPassword,
-      // };
-      // this.$store
-      //   .dispatch("auth/resetPassword", data)
-      //   .then(() => {
-      //     this.presentToast("Password Changed!", "success");
-      //     this.$router.replace("/login");
-      //   })
-      //   .catch((err) => {
-      //     this.presentToast(err.response.data.message, "warning");
-      //   });
     },
   },
 };

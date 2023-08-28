@@ -29,12 +29,14 @@ export default {
       return modalController.dismiss("null", "confirm");
     },
     confirm() {
-      this.$store
-        .dispatch("auth/deleteAccount", this.userDetails.id)
-        .then(() => {
-          this.$router.replace("/");
-          return modalController.dismiss("null", "confirm");
-        });
+      this.$emit("updateStock");
+      return modalController.dismiss("null", "confirm");
+      // this.$store
+      //   .dispatch("auth/deleteAccount", this.userDetails.id)
+      //   .then(() => {
+      //     this.$router.replace("/");
+      //     return modalController.dismiss("null", "confirm");
+      //   });
     },
   },
 };

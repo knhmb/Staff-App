@@ -23,7 +23,11 @@
       <ion-item lines="none">
         <div class="input-content">
           <div :class="{ error: v$.otp.$errors.length }">
-            <base-input v-model="otp" placeholder="OTP"></base-input>
+            <base-input
+              type="password"
+              v-model="otp"
+              placeholder="OTP"
+            ></base-input>
           </div>
         </div>
         <div
@@ -35,7 +39,7 @@
         </div>
       </ion-item>
     </ion-list>
-    <base-button @click="$router.push('/reset-password')">Continue</base-button>
+    <base-button @click="submit">Continue</base-button>
   </form>
 </template>
   
@@ -44,8 +48,10 @@ import { IonList, IonItem, IonIcon, toastController } from "@ionic/vue";
 import { useVuelidate } from "@vuelidate/core";
 import { required, email } from "@vuelidate/validators";
 import ForgotPasswordForm2 from "./ForgotPasswordForm2.vue";
+import utils from "../../mixins/spinner";
 
 export default {
+  mixins: [utils],
   components: {
     IonList,
     IonItem,
@@ -74,7 +80,7 @@ export default {
         return;
       }
       this.$store
-        .dispatch("auth/forgotPasswordOTP", { email: this.email })
+        .dispatch("auth/forgotPassword", { username: this.email })
         .then(() => {
           this.presentToast("OTP has been sent!", "success");
         })
@@ -83,6 +89,23 @@ export default {
         });
     },
     async submit() {
+      const result = await this.v$.email.$validate();
+      if (!result) {
+        return;
+      }
+      const data = {
+        username: this.email,
+        resetToken: this.otp,
+      };
+
+      this.$store
+        .dispatch("auth/verifyOTP", data)
+        .then(() => {
+          this.$router.push("/reset-password");
+        })
+        .catch((err) => {
+          this.presentToast(err.response.data.message, "warning");
+        });
       // const result = await this.v$.$validate();
       // if (!result) {
       //   return;
@@ -102,16 +125,6 @@ export default {
       //   .catch((err) => {
       //     this.presentToast(err.response.data.message, "warning");
       //   });
-    },
-    async presentToast(message, color) {
-      const toast = await toastController.create({
-        message: message,
-        duration: 1500,
-        position: "top",
-        color: color,
-      });
-
-      await toast.present();
     },
   },
 };
