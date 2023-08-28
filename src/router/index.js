@@ -47,6 +47,11 @@ const routes = [
     component: () => import("../pages/StockManagementDetails.vue"),
   },
   {
+    path: "/stock-management/:id/edit",
+    name: "StockManagementEdit",
+    component: () => import("../pages/StockManagementEdit.vue"),
+  },
+  {
     path: "/stock-taking",
     name: "StockTaking",
     component: () => import("../pages/StockTaking.vue"),

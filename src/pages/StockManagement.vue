@@ -26,7 +26,7 @@
         class="item"
         v-for="item in transactions"
         :key="item.id"
-        @click="$router.push('/stock-management/1')"
+        @click="$router.push(`/stock-management/${item.id}`)"
       >
         <div class="left">
           <p>{{ item.createdAt }}</p>

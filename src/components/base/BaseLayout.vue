@@ -7,7 +7,7 @@
           slot="end"
           class="edit-delete"
         >
-          <ion-icon :icon="pencilOutline"></ion-icon>
+          <ion-icon @click="edit" :icon="pencilOutline"></ion-icon>
           <ion-icon :icon="trashOutline"></ion-icon>
         </ion-buttons>
         <ion-buttons
@@ -78,6 +78,14 @@ export default {
   },
   data() {
     return { addCircle, pencilOutline, trashOutline };
+  },
+  methods: {
+    edit() {
+      this.$router.push({
+        name: "StockManagementEdit",
+        params: { id: this.$route.params.id },
+      });
+    },
   },
 };
 </script>

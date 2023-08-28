@@ -164,8 +164,8 @@
     </form>
   </base-layout>
 </template>
-
-<script>
+  
+  <script>
 import {
   IonList,
   IonItem,
@@ -253,25 +253,26 @@ export default {
         remark: this.remark,
         quantity: this.quantity,
       };
-      this.$store
-        .dispatch("dashboard/addTransaction", data)
-        .then(() => {
-          this.presentToast(this.$t("message.added_successfully"), "success");
+      console.log(data);
+      // this.$store
+      //   .dispatch("dashboard/addTransaction", data)
+      //   .then(() => {
+      //     this.presentToast(this.$t("message.added_successfully"), "success");
 
-          this.$store.dispatch("dashboard/getTransactions").then(() => {
-            this.$router.replace("/stock-management");
-            this.date = "";
-            this.itemCategory = "";
-            this.itemName = "";
-            this.locationCode = "";
-            this.transactionType = "";
-            this.remark = "";
-            this.quantity = "";
-          });
-        })
-        .catch((err) => {
-          this.presentToast(err.response.data.message, "warning");
-        });
+      //     this.$store.dispatch("dashboard/getTransactions").then(() => {
+      //       this.$router.replace("/stock-management");
+      //       this.date = "";
+      //       this.itemCategory = "";
+      //       this.itemName = "";
+      //       this.locationCode = "";
+      //       this.transactionType = "";
+      //       this.remark = "";
+      //       this.quantity = "";
+      //     });
+      //   })
+      //   .catch((err) => {
+      //     this.presentToast(err.response.data.message, "warning");
+      //   });
     },
   },
   created() {
@@ -281,8 +282,8 @@ export default {
   },
 };
 </script>
-
-<style scoped>
+  
+  <style scoped>
 form {
   margin: 1rem 0;
 }

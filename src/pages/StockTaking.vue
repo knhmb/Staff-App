@@ -34,7 +34,7 @@ import {
 } from "@ionic/vue";
 import { searchOutline } from "ionicons/icons";
 import { BarcodeScanner } from "@capacitor-community/barcode-scanner";
-import utils from "../../mixins/spinner";
+import utils from "../mixins/spinner";
 
 export default {
   mixins: [utils],

@@ -40,4 +40,7 @@ export default {
     change_password: "Change Password",
     logout: "Logout",
   },
+  message: {
+    added_successfully: "Added Successfully",
+  },
 };

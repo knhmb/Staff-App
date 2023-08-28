@@ -8,46 +8,60 @@
     <div class="card">
       <div class="item">
         <p>Date</p>
-        <p>2023-04-11</p>
+        <p>{{ selectedTransaction.createdAt }}</p>
       </div>
       <div class="item">
         <p>Item Name</p>
-        <p>Name_1</p>
+        <p>{{ selectedTransaction.resources.itemItem.name }}</p>
       </div>
       <div class="item">
         <p>Item Category</p>
-        <p>Category_1</p>
+        <p>{{ selectedTransaction.resources.itemCategory.name }}</p>
       </div>
       <div class="item">
         <p>Item Code</p>
-        <p>C123123123</p>
+        <p>{{ selectedTransaction.resources.itemItem.code }}</p>
       </div>
       <div class="item">
         <p>Bin Location (Warehouse) code</p>
-        <p>A380</p>
+        <p>{{ selectedTransaction.warehouseItem }}</p>
       </div>
       <div class="item">
         <p>Transaction Type</p>
-        <p>Stock In</p>
+        <p>{{ selectedTransaction.resources.transactionType.name }}</p>
       </div>
       <div class="item">
         <p>Quantity</p>
-        <p>999</p>
+        <p>{{ selectedTransaction.quantity }}</p>
       </div>
       <div class="item">
         <p>Remark</p>
         <p>
-          Lorem ipsum dolor sit amet consectetur. Magna bibendum vel bibendum
-          convallis vel nisi.
+          {{ selectedTransaction.remark }}
         </p>
       </div>
       <div class="item">
         <p>Modified by</p>
-        <p>Karen Chan</p>
+        <p>{{ selectedTransaction.resources.updatedBy.name }}</p>
       </div>
     </div>
   </base-layout>
 </template>
+
+<script>
+export default {
+  computed: {
+    transactions() {
+      return this.$store.getters["dashboard/transactions"];
+    },
+    selectedTransaction() {
+      return this.transactions.find(
+        (item) => item.id === this.$route.params.id
+      );
+    },
+  },
+};
+</script>
 
 <style scoped>
 .card {
