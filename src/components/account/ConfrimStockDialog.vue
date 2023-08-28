@@ -1,11 +1,15 @@
 <template>
   <ion-modal id="example-modal" ref="modal" trigger="open-delete-dialog">
     <div class="wrapper">
-      <h4>Complete Stocktaking</h4>
-      <p>Have you complete the stocktaking?</p>
+      <h4>{{ $t("dashboard.complete_stocktaking") }}</h4>
+      <p>{{ $t("dashboard.stock_taking_question") }}</p>
       <div class="btn-content">
-        <base-button @click="cancel">No</base-button>
-        <base-button @click="confirm">Yes</base-button>
+        <base-button @click="cancel">{{
+          $t("dashboard.no_button")
+        }}</base-button>
+        <base-button @click="confirm">{{
+          $t("dashboard.yes_button")
+        }}</base-button>
       </div>
     </div>
   </ion-modal>

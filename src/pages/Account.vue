@@ -4,18 +4,18 @@
     :hide-back-button="true"
     :add-padding="true"
   >
-    <small>Setting</small>
+    <small>{{ $t("dashboard.setting") }}</small>
     <ion-card>
       <div class="item" @click="$router.push('/edit-profile')">
-        <p>Edit Profile</p>
+        <p>{{ $t("menus.edit_profile") }}</p>
         <ion-icon :icon="chevronForwardOutline"></ion-icon>
       </div>
       <div class="item" @click="$router.push('/change-password')">
-        <p>Change Password</p>
+        <p>{{ $t("menus.change_password") }}</p>
         <ion-icon :icon="chevronForwardOutline"></ion-icon>
       </div>
       <div class="item" @click="logout">
-        <p>Logout</p>
+        <p>{{ $t("menus.logout") }}</p>
       </div>
     </ion-card>
     <language></language>

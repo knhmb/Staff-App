@@ -6,7 +6,7 @@
           <base-input
             v-model="id"
             disabled
-            placeholder="Id"
+            :placeholder="$t('auth.id')"
             required
           ></base-input>
         </div>
@@ -16,7 +16,7 @@
           <base-input
             v-model="email"
             disabled
-            placeholder="Email"
+            :placeholder="$t('auth.email')"
             required
           ></base-input>
         </div>
@@ -26,7 +26,7 @@
           <div :class="{ error: v$.username.$errors.length }">
             <base-input
               v-model="username"
-              placeholder="Username"
+              :placeholder="$t('auth.username')"
               required
             ></base-input>
           </div>
@@ -40,7 +40,7 @@
         </div>
       </ion-item>
     </ion-list>
-    <base-button @click="submit">Save</base-button>
+    <base-button @click="submit">{{ $t("dashboard.save_button") }}</base-button>
   </form>
 </template>
 
@@ -94,7 +94,7 @@ export default {
           data,
         })
         .then(() => {
-          this.presentToast("Information Updated", "success");
+          this.presentToast(this.$t("message.information_updated"), "success");
         })
         .catch((err) => {
           this.presentToast(err.response.data.message, "warning");

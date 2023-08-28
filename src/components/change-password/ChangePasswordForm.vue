@@ -6,7 +6,7 @@
           <div :class="{ error: v$.currentPassword.length }">
             <base-input
               v-model="currentPassword"
-              placeholder="Current Password"
+              :placeholder="$t('auth.current_password')"
               required
               type="password"
             ></base-input>
@@ -26,7 +26,7 @@
             <base-input
               v-model="newPassword"
               type="password"
-              placeholder="New Password"
+              :placeholder="$t('auth.new_password')"
               required
             ></base-input>
           </div>
@@ -45,7 +45,7 @@
             <base-input
               type="password"
               v-model="confirmNewPassword"
-              placeholder="Confirm New Password"
+              :placeholder="$t('auth.confirm_new_password')"
               required
             ></base-input>
           </div>
@@ -59,7 +59,7 @@
         </div>
       </ion-item>
     </ion-list>
-    <base-button @click="submit">Reset Password</base-button>
+    <base-button @click="submit">{{ $t("auth.reset_password") }}</base-button>
   </form>
 </template>
   
@@ -115,7 +115,7 @@ export default {
       this.$store
         .dispatch("auth/updateUser", { id: this.userDetails.id, data })
         .then(() => {
-          this.presentToast("Password Changed", "success");
+          this.presentToast(this.$t("message.password_changed"), "success");
         })
         .catch((err) => {
           this.presentToast(err.response.data.message, "warning");

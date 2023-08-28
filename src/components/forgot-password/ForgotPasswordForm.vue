@@ -6,11 +6,11 @@
           <div :class="{ error: v$.email.$errors.length }">
             <base-input
               v-model="email"
-              placeholder="Email"
+              :placeholder="$t('auth.email')"
               required
             ></base-input>
           </div>
-          <p class="otp" @click="sendOtp">Send OTP</p>
+          <p class="otp" @click="sendOtp">{{ $t("auth.send_otp") }}</p>
         </div>
         <div
           class="input-errors"
@@ -26,7 +26,7 @@
             <base-input
               type="password"
               v-model="otp"
-              placeholder="OTP"
+              :placeholder="$t('auth.otp')"
             ></base-input>
           </div>
         </div>
@@ -39,7 +39,7 @@
         </div>
       </ion-item>
     </ion-list>
-    <base-button @click="submit">Continue</base-button>
+    <base-button @click="submit">{{ $t("auth.continue_button") }}</base-button>
   </form>
 </template>
   
@@ -82,7 +82,7 @@ export default {
       this.$store
         .dispatch("auth/forgotPassword", { username: this.email })
         .then(() => {
-          this.presentToast("OTP has been sent!", "success");
+          this.presentToast(this.$t("message.otp_sent"), "success");
         })
         .catch((err) => {
           this.presentToast(err.response.data.message, "warning");

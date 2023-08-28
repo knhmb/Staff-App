@@ -6,7 +6,7 @@
           <div :class="{ error: v$.email.$errors.length }">
             <base-input
               v-model="email"
-              placeholder="Email"
+              :placeholder="$t('auth.email')"
               required
             ></base-input>
           </div>
@@ -24,7 +24,7 @@
           <div :class="{ error: v$.password.$errors.length }">
             <base-input
               v-model="password"
-              placeholder="Password"
+              :placeholder="$t('auth.password')"
               required
               :type="inputType"
             ></base-input>
@@ -41,11 +41,13 @@
       </ion-item>
       <ion-item lines="none">
         <p class="forgot-password" @click="$router.push('/forgot-password')">
-          Forgot Password?
+          {{ $t("auth.forgot_password") }}?
         </p>
       </ion-item>
       <ion-item lines="none">
-        <base-button class="account-btn" @click="submit">Login</base-button>
+        <base-button class="account-btn" @click="submit">{{
+          $t("auth.login")
+        }}</base-button>
       </ion-item>
     </ion-list>
   </form>
@@ -109,7 +111,7 @@ export default {
         .dispatch("auth/login", data)
         .then(() => {
           loading.dismiss();
-          this.presentToast("LoggedIn!", "success");
+          this.presentToast(this.$t("message.logged_in"), "success");
           this.$router.replace("/storage");
         })
         .catch((err) => {

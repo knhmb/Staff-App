@@ -14,6 +14,11 @@ export default {
     current_password: "Current Password",
     new_password: "New Password",
     confirm_new_password: "Confirm New Password",
+    reset_password: "Reset Password",
+    username: "Username",
+    create_account: "Create Account",
+    id: "Id",
+    login: "Login",
   },
   dashboard: {
     location: "Location",
@@ -29,6 +34,10 @@ export default {
     complete_button: "Complete",
     transaction_id: "Transaction ID",
     setting: "Setting",
+    complete_stocktaking: "Complete Stocktaking",
+    stock_taking_question: "Have you complete the stocktaking?",
+    no_button: "No",
+    yes_button: "Yes",
   },
   menus: {
     storage: "Storage",
@@ -45,5 +54,9 @@ export default {
     updated_successfully: "Updated Successfully",
     transaction_deleted: "Transaction Deleted",
     select_location: "Please select a location",
+    password_changed: "Password Changed",
+    information_updated: "Information Updated",
+    otp_sent: "OTP has been sent",
+    logged_in: "LoggedIn",
   },
 };

@@ -4,23 +4,23 @@
     <ion-tab-bar slot="bottom">
       <ion-tab-button tab="storage" href="/storage">
         <ion-icon :icon="serverOutline"></ion-icon>
-        Storage
+        {{ $t("menus.storage") }}
       </ion-tab-button>
       <ion-tab-button tab="stock-management" href="/stock-management">
         <ion-icon :icon="folderOutline"></ion-icon>
-        Management
+        {{ $t("menus.management") }}
       </ion-tab-button>
       <ion-tab-button tab="stock-taking" href="/stock-taking">
         <ion-icon :icon="scanOutline"></ion-icon>
-        Stocktaking
+        {{ $t("menus.stock_taking") }}
       </ion-tab-button>
       <ion-tab-button tab="sales-record" href="/sales-record">
         <ion-icon :icon="documentOutline"></ion-icon>
-        Sales Record
+        {{ $t("menus.sales_record") }}
       </ion-tab-button>
       <ion-tab-button tab="profile" href="/profile">
         <ion-icon :icon="menuOutline"></ion-icon>
-        Menu
+        {{ $t("menus.menu") }}
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>

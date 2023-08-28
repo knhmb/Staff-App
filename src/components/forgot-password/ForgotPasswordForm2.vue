@@ -7,7 +7,7 @@
             <base-input
               type="password"
               v-model="password"
-              placeholder="New Password"
+              :placeholder="$t('auth.new_password')"
             ></base-input>
           </div>
         </div>
@@ -25,7 +25,7 @@
             <base-input
               type="password"
               v-model="confirmPassword"
-              placeholder="Confirm Password"
+              :placeholder="$t('auth.confirm_password')"
             ></base-input>
           </div>
         </div>
@@ -38,7 +38,7 @@
         </div>
       </ion-item>
     </ion-list>
-    <base-button @click="submit">Reset Password</base-button>
+    <base-button @click="submit">{{ $t("auth.reset_password") }}</base-button>
   </form>
 </template>
     
@@ -94,7 +94,7 @@ export default {
         .dispatch("auth/resetPassword", data)
         .then(() => {
           loading.dismiss();
-          this.presentToast("Password Changed!", "success");
+          this.presentToast(this.$t("message.password_changed"), "success");
           this.$router.replace("/login");
         })
         .catch((err) => {

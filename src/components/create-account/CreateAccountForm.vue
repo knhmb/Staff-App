@@ -6,7 +6,7 @@
           <div :class="{ error: v$.username.$errors.length }">
             <base-input
               v-model="username"
-              placeholder="Username"
+              :placeholder="$t('auth.username')"
               required
             ></base-input>
           </div>
@@ -23,10 +23,13 @@
       <ion-item lines="none">
         <div class="input-content">
           <div :class="{ error: v$.email.$errors.length }">
-            <base-input v-model="email" placeholder="Email"></base-input>
+            <base-input
+              v-model="email"
+              :placeholder="$t('auth.email')"
+            ></base-input>
           </div>
           <ion-icon type="email" slot="start" :icon="mailOutline"></ion-icon>
-          <p class="otp" @click="sendOtp">Send OTP</p>
+          <p class="otp" @click="sendOtp">{{ $t("auth.send_otp") }}</p>
         </div>
         <div
           class="input-errors"
@@ -41,7 +44,7 @@
           <div :class="{ error: v$.password.password.$errors.length }">
             <base-input
               v-model="password.password"
-              placeholder="Password"
+              :placeholder="$t('auth.password')"
               type="password"
             ></base-input>
           </div>
@@ -60,7 +63,7 @@
           <div :class="{ error: v$.password.confirm.$errors.length }">
             <base-input
               v-model="password.confirm"
-              placeholder="Confirm Password"
+              :placeholder="$t('auth.confirm_password')"
               type="password"
             ></base-input>
           </div>
@@ -75,7 +78,7 @@
         </div>
       </ion-item>
     </ion-list>
-    <base-button @click="submit">Create Account</base-button>
+    <base-button @click="submit">{{ $t("auth.create_account") }}</base-button>
   </form>
 </template>
 

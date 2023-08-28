@@ -2,15 +2,15 @@
   <div class="language">
     <div
       class="left"
-      :class="{ 'is-selected': currentLang === 'eng' }"
-      @click="setOption('eng')"
+      :class="{ 'is-selected': $i18n.locale === 'en-US' }"
+      @click="setOption('en-US')"
     >
       Eng
     </div>
     <div
       class="right"
-      :class="{ 'is-selected': currentLang === 'chi' }"
-      @click="setOption('chi')"
+      :class="{ 'is-selected': $i18n.locale === 'zh' }"
+      @click="setOption('zh')"
     >
       中文
     </div>
@@ -18,15 +18,14 @@
 </template>
 
 <script>
+import setAuthHeader from "../../axios";
+
 export default {
-  data() {
-    return {
-      currentLang: "eng",
-    };
-  },
   methods: {
     setOption(option) {
-      this.currentLang = option;
+      this.$i18n.locale = option;
+      const token = localStorage.getItem("accessToken");
+      setAuthHeader(token);
     },
   },
 };
