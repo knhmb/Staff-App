@@ -42,5 +42,7 @@ export default {
   },
   message: {
     added_successfully: "Added Successfully",
+    updated_successfully: "Updated Successfully",
+    transaction_deleted: "Transaction Deleted",
   },
 };

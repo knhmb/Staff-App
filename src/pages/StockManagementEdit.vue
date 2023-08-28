@@ -6,7 +6,7 @@
   >
     <form>
       <ion-list>
-        <ion-item lines="none">
+        <!-- <ion-item lines="none">
           <div class="full-width" :class="{ error: v$.date.$errors.length }">
             <base-input
               v-model="date"
@@ -21,7 +21,7 @@
           >
             <div class="error-msg">{{ error.$message }}</div>
           </div>
-        </ion-item>
+        </ion-item> -->
         <ion-item lines="none">
           <div
             class="full-width"
@@ -113,7 +113,7 @@
               <ion-select-option
                 v-for="item in transactionTypes"
                 :key="item.id"
-                :value="item"
+                :value="item.id"
                 >{{ item.name }}</ion-select-option
               >
             </ion-select>
@@ -209,7 +209,7 @@ export default {
   validations() {
     return {
       itemCategory: { required },
-      date: { required },
+      //   date: { required },
       itemName: { required },
       transactionType: { required },
       remark: { required },
@@ -235,50 +235,66 @@ export default {
     warehouses() {
       return this.$store.getters["dashboard/warehouses"];
     },
+    transactions() {
+      return this.$store.getters["dashboard/transactions"];
+    },
+    selectedTransaction() {
+      return this.transactions.find(
+        (item) => item.id === this.$route.params.id
+      );
+    },
   },
   methods: {
     async submit() {
+      console.log("clicked");
       const result = await this.v$.$validate();
       if (!result) {
         return;
       }
       // perform async actions
       const data = {
-        date: this.date,
+        // date: this.date,
         item: this.itemCategory,
         warehouseItem: this.itemName,
         warehouse: this.locationCode,
-        transactionType: this.transactionType.id,
-        transactionId: this.transactionType.name,
+        transactionType: this.transactionType,
+        transactionId: this.transactionType,
         remark: this.remark,
         quantity: this.quantity,
       };
       console.log(data);
-      // this.$store
-      //   .dispatch("dashboard/addTransaction", data)
-      //   .then(() => {
-      //     this.presentToast(this.$t("message.added_successfully"), "success");
-
-      //     this.$store.dispatch("dashboard/getTransactions").then(() => {
-      //       this.$router.replace("/stock-management");
-      //       this.date = "";
-      //       this.itemCategory = "";
-      //       this.itemName = "";
-      //       this.locationCode = "";
-      //       this.transactionType = "";
-      //       this.remark = "";
-      //       this.quantity = "";
-      //     });
-      //   })
-      //   .catch((err) => {
-      //     this.presentToast(err.response.data.message, "warning");
-      //   });
+      this.$store
+        .dispatch("dashboard/updateTransaction", {
+          id: this.$route.params.id,
+          data,
+        })
+        .then(() => {
+          this.presentToast(this.$t("message.updated_successfully"), "success");
+          this.$store.dispatch("dashboard/getTransactions").then(() => {
+            this.$router.replace("/stock-management");
+          });
+        })
+        .catch((err) => {
+          this.presentToast(err.response.data.message, "warning");
+        });
     },
   },
   created() {
     this.$store.dispatch("dashboard/getItemCategories");
     this.$store.dispatch("dashboard/getItemItems");
     this.$store.dispatch("dashboard/getTransactionTypes");
+    console.log(this.selectedTransaction);
+    this.quantity = this.selectedTransaction.quantity;
+    this.itemCategory = this.selectedTransaction.resources.itemItem
+      ? this.selectedTransaction.resources.itemItem.category
+      : "";
+    this.itemName = this.selectedTransaction.resources.warehouseItem.item;
+    this.locationCode = this.selectedTransaction.resources.itemCategory
+      ? this.selectedTransaction.resources.warehouseItem.warehouse
+      : "";
+    this.transactionType = this.selectedTransaction.transactionType;
+    this.remark = this.selectedTransaction.remark;
+    // this.date = new Date(this.selectedTransaction.createdAt);
   },
 };
 </script>

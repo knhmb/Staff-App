@@ -8,7 +8,7 @@
           class="edit-delete"
         >
           <ion-icon @click="edit" :icon="pencilOutline"></ion-icon>
-          <ion-icon :icon="trashOutline"></ion-icon>
+          <ion-icon @click="deleteItem" :icon="trashOutline"></ion-icon>
         </ion-buttons>
         <ion-buttons
           router-link="/stock-management-add"
@@ -52,8 +52,10 @@ import {
 } from "@ionic/vue";
 import { addCircle, pencilOutline, trashOutline } from "ionicons/icons";
 import Tabs from "../Tabs.vue";
+import utils from "../../mixins/spinner";
 
 export default {
+  mixins: [utils],
   props: [
     "pageTitle",
     "pageBackLink",
@@ -85,6 +87,15 @@ export default {
         name: "StockManagementEdit",
         params: { id: this.$route.params.id },
       });
+    },
+    deleteItem() {
+      this.$store
+        .dispatch("dashboard/deleteTransaction", this.$route.params.id)
+        .then(() => {
+          this.presentToast(this.$t("message.transaction_deleted"), "success");
+          this.$router.replace("/stock-management");
+          this.$store.dispatch("dashboard/getTransactions");
+        });
     },
   },
 };

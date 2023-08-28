@@ -46,4 +46,10 @@ export default {
   async updateStock(_, payload) {
     await axios.put(`/api/v1/stocktakes/${payload.id}`, payload.data);
   },
+  async updateTransaction(_, payload) {
+    await axios.put(`api/v1/transactions/${payload.id}`, payload.data);
+  },
+  async deleteTransaction(_, payload) {
+    await axios.delete(`api/v1/transactions/${payload}`);
+  },
 };

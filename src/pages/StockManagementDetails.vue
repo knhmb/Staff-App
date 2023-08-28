@@ -12,15 +12,33 @@
       </div>
       <div class="item">
         <p>Item Name</p>
-        <p>{{ selectedTransaction.resources.itemItem.name }}</p>
+        <p>
+          {{
+            selectedTransaction.resources.itemItem
+              ? selectedTransaction.resources.itemItem.name
+              : "N/A"
+          }}
+        </p>
       </div>
       <div class="item">
         <p>Item Category</p>
-        <p>{{ selectedTransaction.resources.itemCategory.name }}</p>
+        <p>
+          {{
+            selectedTransaction.resources.itemCategory
+              ? selectedTransaction.resources.itemCategory.name
+              : "N/A"
+          }}
+        </p>
       </div>
       <div class="item">
         <p>Item Code</p>
-        <p>{{ selectedTransaction.resources.itemItem.code }}</p>
+        <p>
+          {{
+            selectedTransaction.resources.itemItem
+              ? selectedTransaction.resources.itemItem.code
+              : "N/A"
+          }}
+        </p>
       </div>
       <div class="item">
         <p>Bin Location (Warehouse) code</p>
@@ -28,7 +46,13 @@
       </div>
       <div class="item">
         <p>Transaction Type</p>
-        <p>{{ selectedTransaction.resources.transactionType.name }}</p>
+        <p>
+          {{
+            selectedTransaction.resources.transactionType
+              ? selectedTransaction.resources.transactionType.name
+              : "N/A"
+          }}
+        </p>
       </div>
       <div class="item">
         <p>Quantity</p>
@@ -42,7 +66,13 @@
       </div>
       <div class="item">
         <p>Modified by</p>
-        <p>{{ selectedTransaction.resources.updatedBy.name }}</p>
+        <p>
+          {{
+            selectedTransaction.resources.updatedBy
+              ? selectedTransaction.resources.updatedBy.name
+              : "N/A"
+          }}
+        </p>
       </div>
     </div>
   </base-layout>
