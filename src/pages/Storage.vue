@@ -86,7 +86,7 @@ export default {
       cssClass: "custom-popover",
     };
   },
-  created() {
+  ionViewWillEnter() {
     this.$store.dispatch("dashboard/getWarehouseItems");
     this.$store.dispatch("dashboard/getWarehouses");
   },

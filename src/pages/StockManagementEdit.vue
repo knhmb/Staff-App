@@ -279,7 +279,7 @@ export default {
         });
     },
   },
-  created() {
+  ionViewWillEnter() {
     this.$store.dispatch("dashboard/getItemCategories");
     this.$store.dispatch("dashboard/getItemItems");
     this.$store.dispatch("dashboard/getTransactionTypes");

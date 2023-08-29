@@ -9,8 +9,8 @@
     </div>
     <div
       class="right"
-      :class="{ 'is-selected': $i18n.locale === 'zh' }"
-      @click="setOption('zh')"
+      :class="{ 'is-selected': $i18n.locale === 'zh-Hant-HK' }"
+      @click="setOption('zh-Hant-HK')"
     >
       中文
     </div>
@@ -26,6 +26,7 @@ export default {
       this.$i18n.locale = option;
       const token = localStorage.getItem("accessToken");
       setAuthHeader(token);
+      // this.$router.go(0);
     },
   },
 };

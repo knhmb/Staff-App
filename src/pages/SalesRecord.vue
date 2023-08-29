@@ -41,7 +41,7 @@ export default {
       return this.$store.getters["dashboard/salesRecord"];
     },
   },
-  created() {
+  ionViewWillEnter() {
     this.$store.dispatch("dashboard/getSalesRecord");
   },
 };

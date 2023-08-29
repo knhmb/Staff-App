@@ -76,9 +76,12 @@ export default {
       return this.$store.getters["dashboard/transactions"];
     },
   },
-  created() {
+  ionViewWillEnter() {
     this.$store.dispatch("dashboard/getTransactions");
   },
+  // created() {
+  //   this.$store.dispatch("dashboard/getTransactions");
+  // },
 };
 </script>
 
